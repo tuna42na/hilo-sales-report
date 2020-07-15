@@ -1,6 +1,7 @@
 import React from 'react';
 import tunalogo from './tunalogo.svg';
 import {HiloDaily} from './components/HiloDaily';
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import './App.css';
 
 function App() {
