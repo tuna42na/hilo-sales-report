@@ -1,18 +1,40 @@
 import React from 'react';
-import { Jumbotron, Container } from 'reactstrap';
+import { Jumbotron, Container, Nav, NavItem, NavLink, } from 'reactstrap';
 import { NightSales } from './NightSales';
 import { Tips } from './Tips';
+import classnames from 'classnames';
 
 
 export class HiloDaily extends React.Component {
+
     
+
     render(){ 
         return (<div>
                 <Jumbotron><h1> HiLo Daily Sales Report </h1></Jumbotron>
-
                 <Container>               
                     <NightSales />
                     <Tips />
+                </Container>
+                <br/>
+                <Container>
+                    <Nav>
+                        <NavItem>
+                            <NavLink>
+                                Daily Sales
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink>
+                                Drawers
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink>
+                                Tips
+                            </NavLink>
+                        </NavItem>
+                    </Nav>
                 </Container>
 
                 {/* <Row>
