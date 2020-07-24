@@ -12,6 +12,7 @@ export class AddEmployee extends React.Component{
     
     addPerson(){
         this.props.addEmployee(this.state.name, this.state.hours);
+        this.props.hours(this.state.hours);
     }
     
     onHandleChange(event){
@@ -50,7 +51,7 @@ export class AddEmployee extends React.Component{
                                         />
                                 </InputGroup>
                                 <br/>
-                                <Button outline color="success" onClick={this.addPerson.bind(this)}> Add </Button>
+                                <Button outline type="reset" color="success" onClick={this.addPerson.bind(this)}> Add </Button>
                             </Form>
                         </Col>
                     </Container>

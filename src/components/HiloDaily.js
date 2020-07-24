@@ -1,53 +1,50 @@
 import React from 'react';
-import { Jumbotron, Container, Nav, NavItem, NavLink, } from 'reactstrap';
+import { Jumbotron, Container, NavItem, NavLink, } from 'reactstrap';
+import { Tab, Row, Col, Nav} from 'react-bootstrap';
 import { NightSales } from './NightSales';
 import { Tips } from './Tips';
-import classnames from 'classnames';
 
+
+let nightTips = 100;
 
 export class HiloDaily extends React.Component {
-
-    
+    constructor(){
+        super()
+        this.state = {
+            nightTips:nightTips
+        }
+    }
 
     render(){ 
         return (<div>
-                <Jumbotron><h1> HiLo Daily Sales Report </h1></Jumbotron>
-                <Container>               
-                    <NightSales />
-                    <Tips />
-                </Container>
-                <br/>
-                <Container>
-                    <Nav>
-                        <NavItem>
-                            <NavLink>
-                                Daily Sales
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink>
-                                Drawers
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink>
-                                Tips
-                            </NavLink>
-                        </NavItem>
+            <Jumbotron><h1> HiLo Daily Sales Report </h1></Jumbotron>
+                <hr/>
+            <Container>
+                <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                <Row>
+                    <Col sm={3}>
+                    <Nav variant="pills" className="flex-column">
+                        <Nav.Item>
+                        <Nav.Link eventKey="first">Sales</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                        <Nav.Link eventKey="second">Night Tips</Nav.Link>
+                        </Nav.Item>
                     </Nav>
-                </Container>
-
-                {/* <Row>
-                    <Nav>
-                        <NavItem>
-                            <NavLink><h1>Daily Sales</h1></NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink><h1>Drawers Sales</h1></NavLink>
-                        </NavItem>
-                    </Nav>
-                </Row> */}
-            
+                    </Col>
+                    <Col sm={9}>
+                    <Tab.Content>
+                        <Tab.Pane eventKey="first">
+                            <NightSales />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                            <Tips nightTips={nightTips}/>
+                        </Tab.Pane>
+                    </Tab.Content>
+                    </Col>
+                </Row>
+                </Tab.Container>
+            </Container>
             </div>);
     }
 }

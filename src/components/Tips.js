@@ -2,16 +2,18 @@ import React from 'react';
 import {EmployeeList} from './EmployeeList';
 import {AddEmployee} from './AddEmployee';
 
+let totalHours = 0;
 var employeeGroup = [];
 employeeGroup.push({index:0, name: "Lemmy", hours: 0, tips: 0});
-employeeGroup.push({index:1, name: "Lemmie", hours: 2, tips: 0});
 
 
 export class Tips extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            employeeGroup: employeeGroup
+            employeeGroup: employeeGroup,
+            nightTips: this.props.nightTips,
+            totalHours: totalHours
         }
     }
 
@@ -24,6 +26,7 @@ export class Tips extends React.Component{
             tips: 0
         });
         this.setState({employeeGroup: employeePlus});
+        
     }
 
     removeEmployees = index =>{
@@ -31,14 +34,19 @@ export class Tips extends React.Component{
         employeeLess.splice(index , 1);
         this.setState({ employeeGroup:employeeLess });
     }
+    
+    updateHours = hours =>{
+        let newHours = this.state.totalHours + parseInt(hours);
+        this.setState({ totalHours: newHours });
+    }
 
     render(){
         return(
         <div><h4>Total Tips</h4>
         <EmployeeList employees={this.state.employeeGroup} removeWorker={this.removeEmployees.bind(this)}/>
-        <AddEmployee addEmployee={this.addEmployee.bind(this)} />
-        <h5>Total Hrs: </h5>
-        <h5>Average $ per Hr:  </h5></div>);
+        <AddEmployee addEmployee={this.addEmployee.bind(this)} hours={this.updateHours} /><br/>
+        <h5>Total Hrs: {this.state.totalHours}</h5>
+        <h5>Average $ per Hr: </h5></div>);
         }
     }
 
