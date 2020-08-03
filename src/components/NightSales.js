@@ -4,7 +4,11 @@ export class NightSales extends React.Component {
 
     render(){
         return(
-            <p> Nightly Sales Go Here </p>
+            <div><h2>Daily Sales</h2>
+            <br/>
+            <p> All Day Sales:<input></input> - Morning Sales:<input></input> = Night Sales: </p>
+            <p> All Day Tips:<input></input> - Morning Tips:<input></input></p>
+            </div>
         );
     }
 }

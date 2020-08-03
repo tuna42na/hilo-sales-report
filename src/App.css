@@ -40,3 +40,8 @@
 .list-group{
   text-align: justify;
 }
+
+.viewbox{
+  min-height: 500px;
+  padding: 40px 0px;
+}

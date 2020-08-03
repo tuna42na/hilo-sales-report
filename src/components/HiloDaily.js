@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container, NavItem, NavLink, } from 'reactstrap';
+import { Jumbotron, Container } from 'reactstrap';
 import { Tab, Row, Col, Nav} from 'react-bootstrap';
 import { NightSales } from './NightSales';
 import { Tips } from './Tips';
@@ -18,8 +18,8 @@ export class HiloDaily extends React.Component {
     render(){ 
         return (<div>
             <Jumbotron><h1> HiLo Daily Sales Report </h1></Jumbotron>
-                <hr/>
-            <Container>
+
+            <Container className="viewbox">
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
                     <Col sm={3}>
