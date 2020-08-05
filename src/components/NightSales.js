@@ -1,14 +1,28 @@
 import React from 'react';
+import { Row, Col, Input, Container, Button } from 'reactstrap';
+
+let nightTips = 0;
 
 export class NightSales extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={
+            nightTips: nightTips,
+        }
+    }
 
     render(){
         return(
-            <div><h2>Daily Sales</h2>
-            <br/>
-            <p> All Day Sales:<input></input> - Morning Sales:<input></input> = Night Sales: </p>
-            <p> All Day Tips:<input></input> - Morning Tips:<input></input></p>
-            </div>
+            <Container>
+                <Col>
+                    <h4>Daily Sales</h4>
+                    <br/>
+                    <div><Col> All Day Sales: <Input /> - Morning Sales:<Input /> = Night Sales: </Col></div>
+                    <br/>
+                    <div><Col> All Day Tips:<Input />- Morning Tips:<Input /> = Night Tips </Col></div>
+                </Col>
+                <Button outline color="success"> Next Tab </Button>
+            </Container>
         );
     }
 }
