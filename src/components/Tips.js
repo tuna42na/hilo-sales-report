@@ -1,61 +1,47 @@
-import React from 'react';
-import { EmployeeList } from './EmployeeList';
-import { AddEmployee } from './AddEmployee';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import EmployeeList from "./EmployeeList";
+import AddEmployee from "./AddEmployee";
 
-let totalHours = 0;
-var employeeGroup = [];
-employeeGroup.push({index:0, name: "Lemmy", hours: 0 });
+const Tips = (props) => {
+  const [employeeGroup, setEmployeeGroup] = useState([]);
+  const [totalHours, setTotalHours] = useState(0);
 
+  const addEmployee = (name, hours) => {
+    let employeePlus = employeeGroup;
+    employeePlus.push({
+      index: employeePlus.length + 1,
+      name: name,
+      hours: hours,
+    });
+    let newHours = totalHours + parseInt(hours);
+    setEmployeeGroup(employeePlus);
+    setTotalHours(newHours);
+  };
 
-export class Tips extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            employeeGroup: employeeGroup,
-            nightTips: this.props.nightTips,
-            totalHours: totalHours
-        }
-    }
+  const removeEmployees = (index) => {
+    let minusHours = totalHours - employeeGroup[index].hours;
+    setTotalHours(minusHours);
+    // Change array
+    let employeeLess = employeeGroup;
+    employeeLess.splice(index, 1);
+    setEmployeeGroup(employeeLess);
+  };
 
-    addEmployee = (name, hours) => {
-        let employeePlus = this.state.employeeGroup;
-        employeePlus.push({
-            index: employeePlus.length+1,
-            name: name,
-            hours: hours
-        });
-        this.setState({employeeGroup: employeePlus});
-        
-    }
-
-    removeEmployees = index =>{
-        let minusHours = (this.state.totalHours-employeeGroup[index].hours); 
-        this.setState({ totalHours:minusHours });
-        // Change array
-        let employeeLess = this.state.employeeGroup;
-        employeeLess.splice(index , 1);
-        this.setState({ employeeGroup:employeeLess });
-
-    }
-    
-    updateHours = hours =>{
-        let newHours = this.state.totalHours + parseInt(hours);
-        this.setState({ totalHours: newHours });
-    }
-
-    render(){
-        return(
-        <div><h4>Total Tips</h4>
-        <EmployeeList employees={this.state.employeeGroup} removeWorker={this.removeEmployees.bind(this)}/>
-        <AddEmployee addEmployee={this.addEmployee.bind(this)} hours={this.updateHours} /><br/>
-        <h5>Total Hrs: {this.state.totalHours}</h5>
-        <h5>Average $ per Hr: {(this.state.nightTips/this.state.totalHours).toFixed(2)}  </h5></div>);
-        }
-    }
+  return (
+    <div>
+      <h4>Total Tips</h4>
+      <EmployeeList employees={employeeGroup} removeWorker={removeEmployees} />
+      <AddEmployee addEmployee={addEmployee} />
+      <h5>Total Hrs: {totalHours}</h5>
+      <h5>Average $ per Hr: {(props.nightTips / totalHours).toFixed(2)} </h5>
+    </div>
+  );
+};
 
 Tips.propTypes = {
-    nightTips: propTypes.number,
-    totalHours: propTypes.number,
-    employeeGroup: propTypes.array
+  nightTips: PropTypes.number,
+  totalHours: PropTypes.number,
+  employeeGroup: PropTypes.array,
 };
+export default Tips;
