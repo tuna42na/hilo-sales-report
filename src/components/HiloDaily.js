@@ -5,6 +5,7 @@ import NightSales from "./NightSales";
 import Tips from "./Tips";
 import Drawers from "./Drawers";
 import Notes from "./Notes";
+import NextPrev from "./NextPrev";
 
 let currentDay = new Date();
 let day = currentDay.getDate();
@@ -75,6 +76,7 @@ export const HiloDaily = () => {
                   <Notes />
                 </Tab.Pane>
               </Tab.Content>
+              <NextPrev />
             </Col>
           </Row>
         </Tab.Container>

@@ -29,13 +29,13 @@ const Tips = (props) => {
   };
 
   return (
-    <div>
+    <>
       <h4>Total Tips</h4>
       <EmployeeList employees={employeeGroup} removeWorker={removeEmployees} />
       <AddEmployee addEmployee={addEmployee} />
       <h5>Total Hrs: {totalHours}</h5>
       <h5>Average $ per Hr: {(props.nightTips / totalHours).toFixed(2)} </h5>
-    </div>
+    </>
   );
 };
 
