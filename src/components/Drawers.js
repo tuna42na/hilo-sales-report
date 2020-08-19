@@ -76,6 +76,20 @@ const Drawers = () => {
             </Col>
 
             <Col md="auto">Pm Tips Owed $: {edit.pmTips}</Col>
+
+            <Col md="auto">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>Cash Tips : $</InputGroupText>
+                  <Input
+                    name="cashTips"
+                    value={edit.cashTips}
+                    placeholder="0"
+                    onChange={onHandleChange}
+                  />
+                </InputGroupAddon>
+              </InputGroup>
+            </Col>
           </Row>
         </ListGroupItem>
         <ListGroupItem>
@@ -132,6 +146,7 @@ Drawers.propTypes = {
   cashOwed: PropTypes.number,
   pettyCash: PropTypes.number,
   overUnderAmount: PropTypes.number,
+  cashTips: PropTypes.number,
 };
 
 export default Drawers;

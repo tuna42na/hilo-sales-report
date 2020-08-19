@@ -1,7 +1,12 @@
 import React from "react";
 import { Row, Col, Input, Container, Button } from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { setMorningSales, setNightSales } from "../actions/salesActions";
 
 const NightSales = () => {
+  const dispatch = useDispatch();
+  const { morningSales, nightSales } = useSelector((state) => state.sales);
+
   return (
     <Container>
       <Row>
@@ -10,11 +15,19 @@ const NightSales = () => {
           <Row>
             <Col>
               {" "}
-              All Day Sales: <Input /> - Morning Sales:
-              <Input /> = Night Sales:{" "}
+              All Day Sales:{" "}
+              <Input
+                onChange={(e) => dispatch(setMorningSales(e.target.value))}
+                value={morningSales}
+              />
+              - Morning Sales:
+              <Input
+                onChange={(e) => dispatch(setNightSales(e.target.value))}
+                value={nightSales}
+              />{" "}
+              = Night Sales:{" "}
             </Col>
           </Row>
-          {/* <div><Col> All Day Tips:<Input />- Morning Tips:<Input /> = Night Tips </Col></div> */}
         </Col>
       </Row>
       <Button outline color="success">

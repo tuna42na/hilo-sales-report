@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Jumbotron, Container, Input } from "reactstrap";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { setTab } from "../actions/tabActions";
 import NightSales from "./NightSales";
 import Tips from "./Tips";
 import Drawers from "./Drawers";
@@ -20,6 +22,13 @@ let year = currentDay.getFullYear();
 
 export const HiloDaily = () => {
   const [nightTips, setNightTips] = useState(100);
+  const dispatch = useDispatch();
+  const handleTabClick = (tab) => {
+    console.log("[hilodaily] handleTabClick", tab);
+    dispatch(setTab(tab));
+  };
+  const tab = useSelector((state) => state.tab);
+  console.log("tab", tab);
 
   return (
     <div>
@@ -43,36 +52,39 @@ export const HiloDaily = () => {
       </Jumbotron>
 
       <Container className="viewbox">
-        <Tab.Container id="left-tabs-example" defaultActiveKey="second">
+        <Tab.Container
+          id="left-tabs-example"
+          activeKey={tab}
+          onSelect={handleTabClick}>
           <Row>
             <Col sm={3}>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
-                  <Nav.Link eventKey="first">Sales</Nav.Link>
+                  <Nav.Link eventKey="0">Sales</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">Drawers</Nav.Link>
+                  <Nav.Link eventKey="1">Drawers</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="third">Night Tips</Nav.Link>
+                  <Nav.Link eventKey="2">Night Tips</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="fourth">Notes</Nav.Link>
+                  <Nav.Link eventKey="3">Notes</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
             <Col sm={9}>
               <Tab.Content>
-                <Tab.Pane eventKey="first">
+                <Tab.Pane eventKey="0">
                   <NightSales />
                 </Tab.Pane>
-                <Tab.Pane eventKey="second">
+                <Tab.Pane eventKey="1">
                   <Drawers />
                 </Tab.Pane>
-                <Tab.Pane eventKey="third">
+                <Tab.Pane eventKey="2">
                   <Tips nightTips={nightTips} />
                 </Tab.Pane>
-                <Tab.Pane eventKey="fourth">
+                <Tab.Pane eventKey="3">
                   <Notes />
                 </Tab.Pane>
               </Tab.Content>
