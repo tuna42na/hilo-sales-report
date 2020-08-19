@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import EmployeeList from "./EmployeeList";
 import AddEmployee from "./AddEmployee";
 
-const Tips = (props) => {
+const Tips = () => {
+  const { totalTips } = useSelector((state) => state.drawers);
   const [employeeGroup, setEmployeeGroup] = useState([]);
   const [totalHours, setTotalHours] = useState(0);
 
@@ -34,13 +36,14 @@ const Tips = (props) => {
       <EmployeeList employees={employeeGroup} removeWorker={removeEmployees} />
       <AddEmployee addEmployee={addEmployee} />
       <h5>Total Hrs: {totalHours}</h5>
-      <h5>Average $ per Hr: {(props.nightTips / totalHours).toFixed(2)} </h5>
+      <h5> Total Tips: {totalTips} </h5>
+      <h5>Average $ per Hr: {(totalTips / totalHours).toFixed(2)} </h5>
     </>
   );
 };
 
 Tips.propTypes = {
-  nightTips: PropTypes.number,
+  totalTips: PropTypes.number,
   totalHours: PropTypes.number,
   employeeGroup: PropTypes.array,
 };

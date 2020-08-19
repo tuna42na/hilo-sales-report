@@ -1,6 +1,7 @@
 import * as types from "../types";
 import { combineReducers } from "redux";
 
+// Tab State and Actions
 const tab = (state = 0, action) => {
   switch (action.type) {
     case types.SET_TAB:
@@ -9,7 +10,7 @@ const tab = (state = 0, action) => {
       return state;
   }
 };
-
+// Sales State and Actions
 const initialSalesState = {
   morningSales: "",
   nightSales: "",
@@ -31,5 +32,63 @@ const sales = (state = initialSalesState, action) => {
       return state;
   }
 };
+// Drawer State and Actions
+const intitialDrawerState = {
+  grossTips: "",
+  amTips: "",
+  pmTips: "",
+  cashTips: "",
+  totalTips: "",
+  cashOwed: "",
+  pettyCash: "",
+  overUnder: "",
+};
 
-export default combineReducers({ tab, sales });
+const drawers = (state = intitialDrawerState, action) => {
+  switch (action.type) {
+    case types.SET_GROSS_TIPS:
+      return {
+        ...state,
+        grossTips: action.payload,
+      };
+    case types.SET_AM_TIPS:
+      return {
+        ...state,
+        amTips: action.payload,
+      };
+    case types.SET_PM_TIPS:
+      return {
+        ...state,
+        pmTips: action.payload,
+      };
+    case types.SET_CASH_TIPS:
+      return {
+        ...state,
+        cashTips: action.payload,
+      };
+    case types.SET_TOTAL_TIPS:
+      return {
+        ...state,
+        totalTips: action.payload,
+      };
+    case types.SET_CASH_OWED:
+      return {
+        ...state,
+        cashOwed: action.payload,
+      };
+    case types.SET_PETTY_CASH:
+      return {
+        ...state,
+        pettyCash: action.payload,
+      };
+    case types.SET_OVER_UNDER:
+      return {
+        ...state,
+        overUnder: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ tab, sales, drawers });

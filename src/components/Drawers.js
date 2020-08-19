@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -13,33 +13,35 @@ import {
   ButtonGroup,
   Button,
 } from "reactstrap";
-
-const defaultState = {
-  grossTips: 0,
-  amTips: 0,
-  pmTips: 0,
-  cashOwed: 0,
-  overUnderAmount: 0,
-};
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setGrossTips,
+  setAmTips,
+  setPmTips,
+  setCashTips,
+  setTotalTips,
+  setCashOwed,
+  setPettyCash,
+  setOverUnder,
+} from "../actions/drawerActions";
 
 const Drawers = () => {
-  const [edit, setEdit] = useState(defaultState);
+  const dispatch = useDispatch();
+  const {
+    grossTips,
+    amTips,
+    cashTips,
+    pmTips,
+    cashOwed,
+    pettyCash,
+    overUnder,
+  } = useSelector((state) => state.drawers);
 
-  const onHandleChange = (event) => {
-    const { target } = event;
-    const { name, value } = target;
-
-    setEdit({
-      ...edit,
-      [name]: value,
-    });
-  };
-
-  const saveValues = () => {
-    setEdit({
-      ...edit,
-      pmTips: edit.grossTips - edit.amTips,
-    });
+  const calculateAllTips = () => {
+    let nightTips = parseInt(grossTips - amTips);
+    let totalTips = nightTips + parseInt(cashTips);
+    dispatch(setPmTips(nightTips));
+    dispatch(setTotalTips(totalTips));
   };
 
   return (
@@ -54,10 +56,8 @@ const Drawers = () => {
                   <InputGroupText>Gross Tips : $</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="grossTips"
-                  value={edit.grossTips}
-                  placeholder="0"
-                  onChange={onHandleChange}
+                  value={grossTips}
+                  onChange={(e) => dispatch(setGrossTips(e.target.value))}
                 />
               </InputGroup>
             </Col>
@@ -66,30 +66,25 @@ const Drawers = () => {
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>AM Tips : $</InputGroupText>
                   <Input
-                    name="amTips"
-                    value={edit.amTips}
-                    placeholder="0"
-                    onChange={onHandleChange}
+                    value={amTips}
+                    onChange={(e) => dispatch(setAmTips(e.target.value))}
                   />
                 </InputGroupAddon>
               </InputGroup>
             </Col>
-
-            <Col md="auto">Pm Tips Owed $: {edit.pmTips}</Col>
 
             <Col md="auto">
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>Cash Tips : $</InputGroupText>
                   <Input
-                    name="cashTips"
-                    value={edit.cashTips}
-                    placeholder="0"
-                    onChange={onHandleChange}
+                    value={cashTips}
+                    onChange={(e) => dispatch(setCashTips(e.target.value))}
                   />
                 </InputGroupAddon>
               </InputGroup>
             </Col>
+            <Col md="auto">Pm Tips Owed $: {pmTips} </Col>
           </Row>
         </ListGroupItem>
         <ListGroupItem>
@@ -101,10 +96,8 @@ const Drawers = () => {
                   <InputGroupText>Cash Owed : $</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="cashOwed"
-                  value={edit.cashOwed}
-                  placeholder="0"
-                  onChange={onHandleChange}
+                  value={cashOwed}
+                  onChange={(e) => dispatch(setCashOwed(e.target.value))}
                 />
               </InputGroup>
             </Col>
@@ -114,10 +107,8 @@ const Drawers = () => {
                   <InputGroupText>Petty Cash Balance : $</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  name="pettyCash"
-                  value={edit.pettyCash}
-                  placeholder="0"
-                  onChange={onHandleChange}
+                  value={pettyCash}
+                  onChange={(e) => dispatch(setPettyCash(e.target.value))}
                 />
               </InputGroup>
             </Col>
@@ -127,7 +118,10 @@ const Drawers = () => {
               <ButtonGroup>
                 <Button color="success">Over</Button>
                 <Button color="success">Under</Button>
-                <Input name="overUnderAmount" />
+                <Input
+                  value={overUnder}
+                  onChange={(e) => dispatch(setOverUnder(e.target.value))}
+                />
               </ButtonGroup>
             </Col>
             <Col md="auto">
@@ -136,16 +130,17 @@ const Drawers = () => {
           </Row>
         </ListGroupItem>
       </ListGroup>
-      <Button onClick={saveValues}> Save </Button>
+      <Button onClick={calculateAllTips}> Save </Button>
     </Container>
   );
 };
 Drawers.propTypes = {
   grossTips: PropTypes.number,
   amTips: PropTypes.number,
+  pmTips: PropTypes.number,
   cashOwed: PropTypes.number,
   pettyCash: PropTypes.number,
-  overUnderAmount: PropTypes.number,
+  overUnder: PropTypes.number,
   cashTips: PropTypes.number,
 };
 
