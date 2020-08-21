@@ -1,34 +1,47 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
+  Button,
   Container,
   Col,
   Form,
   Input,
-  Button,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
 } from "reactstrap";
+// import { Button } from "material-kit-react";
+import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 
 const defaultState = {
+  index: "",
   name: "",
   hours: "",
 };
 
-const AddEmployee = ({ addEmployee }) => {
-  const [edit, setEdit] = useState(defaultState);
+const AddEmployee = () => {
+  const { totalHours, employeeGroup } = useSelector((state) => state.tipsheet);
+  const dispatch = useDispatch();
+  const [edit, setEdit] = useState([]);
 
   const addPerson = () => {
-    addEmployee(edit.name, edit.hours);
-
+    let employeePlus = employeeGroup;
+    console.log(employeePlus);
+    employeePlus.push({
+      index: employeePlus.length,
+      name: edit.name,
+      hours: edit.hours,
+    });
+    let newHours = totalHours + parseInt(edit.hours);
+    dispatch(setEmployees(employeePlus));
+    dispatch(setTotalHours(newHours));
     setEdit(defaultState);
   };
 
   const onHandleChange = (event) => {
     const { target } = event;
     const { name, value } = target;
-
     setEdit({
       ...edit,
       [name]: value,
@@ -65,12 +78,7 @@ const AddEmployee = ({ addEmployee }) => {
                 />
               </InputGroup>
 
-              <Button
-                style={{ padding: "0 20px" }}
-                outline
-                type="reset"
-                color="success"
-                onClick={addPerson}>
+              <Button type="button" color="success" onClick={addPerson}>
                 Add
               </Button>
             </Form>

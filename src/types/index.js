@@ -9,3 +9,5 @@ export const SET_TOTAL_TIPS = "SET_TOTAL_TIPS";
 export const SET_CASH_OWED = "SET_CASH_OWED";
 export const SET_PETTY_CASH = "SET_PETTY_CASH";
 export const SET_OVER_UNDER = "SET_OVER_UNDER";
+export const SET_EMPLOYEES = "SET_EMPLOYEES";
+export const SET_TOTAL_HOURS = "SET_TOTAL_HOURS";

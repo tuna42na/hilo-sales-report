@@ -33,7 +33,7 @@ const sales = (state = initialSalesState, action) => {
   }
 };
 // Drawer State and Actions
-const intitialDrawerState = {
+const initialDrawerState = {
   grossTips: "",
   amTips: "",
   pmTips: "",
@@ -44,7 +44,7 @@ const intitialDrawerState = {
   overUnder: "",
 };
 
-const drawers = (state = intitialDrawerState, action) => {
+const drawers = (state = initialDrawerState, action) => {
   switch (action.type) {
     case types.SET_GROSS_TIPS:
       return {
@@ -91,4 +91,28 @@ const drawers = (state = intitialDrawerState, action) => {
   }
 };
 
-export default combineReducers({ tab, sales, drawers });
+// Tip Sheet State and Actions
+const initialTipSheetState = {
+  employeeGroup: [],
+  totalHours: 0,
+};
+
+const tipsheet = (state = initialTipSheetState, action) => {
+  switch (action.type) {
+    case types.SET_EMPLOYEES:
+      console.log(action.payload);
+      return {
+        ...state,
+        employeeGroup: [...action.payload],
+      };
+    case types.SET_TOTAL_HOURS:
+      return {
+        ...state,
+        totalHours: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ tab, sales, drawers, tipsheet });
