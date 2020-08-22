@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
-  Button,
-  Container,
   Col,
-  Form,
-  Input,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
 } from "reactstrap";
-// import { Button } from "material-kit-react";
+import { Button, Container, Form, Input } from "semantic-ui-react";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 
 const defaultState = {
@@ -49,43 +45,41 @@ const AddEmployee = () => {
   };
 
   return (
-    <div>
-      <Row>
-        <Container>
-          <Col md={{ size: 6, offset: 3 }}>
-            <Form>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend" />
-                <InputGroupText>Employee Name: </InputGroupText>
-                <Input
-                  type="text"
-                  name="name"
-                  value={edit.name}
-                  placeholder="Lemmy"
-                  onChange={onHandleChange}
-                />
-              </InputGroup>
+    <>
+      <Container textAlign="center">
+        <Col>
+          <Form>
+            <InputGroup>
+              <InputGroupAddon addonType="prepend" />
+              <InputGroupText>Employee Name: </InputGroupText>
+              <Input
+                type="text"
+                name="name"
+                value={edit.name}
+                placeholder="Lemmy"
+                onChange={onHandleChange}
+              />
+            </InputGroup>
 
-              <InputGroup>
-                <InputGroupAddon addonType="prepend" />
-                <InputGroupText>Hours: </InputGroupText>
-                <Input
-                  type="number"
-                  name="hours"
-                  value={edit.hours}
-                  placeholder="5"
-                  onChange={onHandleChange}
-                />
-              </InputGroup>
+            <InputGroup>
+              <InputGroupAddon addonType="prepend" />
+              <InputGroupText>Hours: </InputGroupText>
+              <Input
+                type="number"
+                name="hours"
+                value={edit.hours}
+                placeholder="5"
+                onChange={onHandleChange}
+              />
+            </InputGroup>
 
-              <Button type="button" color="success" onClick={addPerson}>
-                Add
-              </Button>
-            </Form>
-          </Col>
-        </Container>
-      </Row>
-    </div>
+            <Button type="button" color="success" onClick={addPerson}>
+              Add
+            </Button>
+          </Form>
+        </Col>
+      </Container>
+    </>
   );
 };
 

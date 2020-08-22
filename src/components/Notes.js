@@ -1,15 +1,13 @@
 import React from "react";
-import { Row, Container, Button } from "reactstrap";
+import { Container, Button, Form, TextArea } from "semantic-ui-react";
 
 const Notes = () => {
   return (
     <Container>
-      <Row>
-        <textarea />
-      </Row>
-      <Row>
-        <Button> Finish Report </Button>
-      </Row>
+      <Form>
+        <TextArea placeholder="LOL, what happened tonight?!" />
+      </Form>
+      <Button> Finish Report </Button>
     </Container>
   );
 };

@@ -1,13 +1,17 @@
 import React from "react";
-import { Container, Row, Button } from "reactstrap";
+import { Button, Container, Icon } from "semantic-ui-react";
 
 const NextPrev = () => {
   return (
     <Container>
-      <Row>
-        <Button> Previous </Button>
-        <Button> Next </Button>
-      </Row>
+      <Button>
+        <Icon name="left arrow" />
+        Previous
+      </Button>
+      <Button>
+        Next
+        <Icon name="right arrow" />
+      </Button>
     </Container>
   );
 };

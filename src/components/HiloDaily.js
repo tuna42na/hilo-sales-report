@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Jumbotron, Container, Input } from "reactstrap";
+import React from "react";
+import { Jumbotron } from "reactstrap";
+import { Header, Input, Container } from "semantic-ui-react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setTab } from "../actions/tabActions";
@@ -21,7 +22,6 @@ if (month < 10) {
 let year = currentDay.getFullYear();
 
 export const HiloDaily = () => {
-  const [nightTips, setNightTips] = useState(100);
   const dispatch = useDispatch();
   const handleTabClick = (tab) => {
     console.log("[hilodaily] handleTabClick", tab);
@@ -33,19 +33,19 @@ export const HiloDaily = () => {
   return (
     <div>
       <Jumbotron>
-        <h1> HiLo Daily Sales Report </h1>
+        <Header as="h1" size="huge">
+          {" "}
+          HiLo Daily Sales Report{" "}
+        </Header>
         <Container>
           <Row>
-            <Col
-              sm="12"
-              md={{ size: 1, offset: 3 }}
-              lg={{ size: 1, offset: 3 }}>
-              <Input placeholder=" Name " />
-            </Col>
-          </Row>
-          <Row>
             <Col>
-              Date: {month}/{day}/{year}
+              <Input placeholder=" Manager on Duty " />
+            </Col>
+            <Col>
+              <Header as="h4">
+                Date:{month}/{day}/{year}
+              </Header>
             </Col>
           </Row>
         </Container>
@@ -82,7 +82,7 @@ export const HiloDaily = () => {
                   <Drawers />
                 </Tab.Pane>
                 <Tab.Pane eventKey="2">
-                  <Tips nightTips={nightTips} />
+                  <Tips />
                 </Tab.Pane>
                 <Tab.Pane eventKey="3">
                   <Notes />

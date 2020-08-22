@@ -16,7 +16,19 @@
     "react-router": "^5.2.0",
     "react-scripts": "^3.4.3",
     "reactstrap": "^8.5.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^1.2.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-transform-react-jsx"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
