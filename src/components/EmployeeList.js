@@ -1,14 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
-import {
-  Container,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Button,
-} from "reactstrap";
+import { Container, Button, Icon } from "semantic-ui-react";
+import { ListGroup, ListGroupItem } from "reactstrap";
 
 const EmployeeList = () => {
   const { employeeGroup, totalHours } = useSelector((state) => state.tipsheet);
@@ -24,31 +18,26 @@ const EmployeeList = () => {
   };
 
   return (
-    <Container>
-      <Row className="container">
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
-          <ListGroup>
-            {employeeGroup.map((employee, i) => (
-              <ListGroupItem key={i}>
-                <strong>Name: </strong> {employee.name}
-                <br />
-                <strong> Employee Hours: </strong>
-                {employee.hours}
-                <br />
-                <strong> Tips Owed: </strong>$
-                {((employee.hours * totalTips) / totalHours).toFixed(2)}
-                <Button
-                  key={i}
-                  type="button"
-                  className="close"
-                  onClick={() => removeEmployee(i)}>
-                  &times;
-                </Button>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
-        </Col>
-      </Row>
+    <Container text>
+      <ListGroup>
+        {employeeGroup.map((employee, i) => (
+          <ListGroupItem key={i}>
+            <Icon
+              name="window close outline"
+              key={i}
+              type="button"
+              onClick={() => removeEmployee(i)}
+            />
+            <strong>Name: </strong> {employee.name}
+            <br />
+            <strong> Employee Hours: </strong>
+            {employee.hours}
+            <br />
+            <strong> Tips Owed: </strong>$
+            {((employee.hours * totalTips) / totalHours).toFixed(2)}
+          </ListGroupItem>
+        ))}
+      </ListGroup>
     </Container>
   );
 };

@@ -1,13 +1,27 @@
 import React from "react";
-import { Container, Button, Form, TextArea } from "semantic-ui-react";
+import {
+  Container,
+  Button,
+  Form,
+  TextArea,
+  Segment,
+  Header,
+} from "semantic-ui-react";
 
 const Notes = () => {
   return (
-    <Container>
-      <Form>
-        <TextArea placeholder="LOL, what happened tonight?!" />
-      </Form>
-      <Button> Finish Report </Button>
+    <Container text>
+      <Header as="h2"> Notes </Header>
+      <Segment.Group>
+        <Segment>
+          <Form>
+            <TextArea placeholder="LOL, what happened tonight?!" />
+          </Form>
+        </Segment>
+        <Segment>
+          <Button> Finish Report </Button>
+        </Segment>
+      </Segment.Group>
     </Container>
   );
 };

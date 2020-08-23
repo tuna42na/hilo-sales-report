@@ -12,12 +12,23 @@ const tab = (state = 0, action) => {
 };
 // Sales State and Actions
 const initialSalesState = {
+  grossSales: "",
   morningSales: "",
   nightSales: "",
+  cashSales: "",
+  creditCardSales: "",
+  giftCardSales: "",
+  payin: "",
+  payout: "",
 };
 
 const sales = (state = initialSalesState, action) => {
   switch (action.type) {
+    case types.SET_GROSS_SALES:
+      return {
+        ...state,
+        grossSales: action.payload,
+      };
     case types.SET_MORNING_SALES:
       return {
         ...state,
@@ -27,6 +38,31 @@ const sales = (state = initialSalesState, action) => {
       return {
         ...state,
         nightSales: action.payload,
+      };
+    case types.SET_CASH_SALES:
+      return {
+        ...state,
+        cashSales: action.payload,
+      };
+    case types.SET_CREDIT_SALES:
+      return {
+        ...state,
+        creditCardSales: action.payload,
+      };
+    case types.SET_GIFT_SALES:
+      return {
+        ...state,
+        giftCardSales: action.payload,
+      };
+    case types.SET_PAYIN:
+      return {
+        ...state,
+        payin: action.payload,
+      };
+    case types.SET_PAYOUT:
+      return {
+        ...state,
+        payout: action.payload,
       };
     default:
       return state;

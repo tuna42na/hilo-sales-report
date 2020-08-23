@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Row,
-  Col,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-} from "reactstrap";
-import { Button, Container, Form, Input } from "semantic-ui-react";
+  Button,
+  Container,
+  Form,
+  Input,
+  Grid,
+  Segment,
+} from "semantic-ui-react";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 
 const defaultState = {
@@ -23,7 +23,6 @@ const AddEmployee = () => {
 
   const addPerson = () => {
     let employeePlus = employeeGroup;
-    console.log(employeePlus);
     employeePlus.push({
       index: employeePlus.length,
       name: edit.name,
@@ -46,38 +45,38 @@ const AddEmployee = () => {
 
   return (
     <>
-      <Container textAlign="center">
-        <Col>
-          <Form>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend" />
-              <InputGroupText>Employee Name: </InputGroupText>
-              <Input
-                type="text"
-                name="name"
-                value={edit.name}
-                placeholder="Lemmy"
-                onChange={onHandleChange}
-              />
-            </InputGroup>
-
-            <InputGroup>
-              <InputGroupAddon addonType="prepend" />
-              <InputGroupText>Hours: </InputGroupText>
-              <Input
-                type="number"
-                name="hours"
-                value={edit.hours}
-                placeholder="5"
-                onChange={onHandleChange}
-              />
-            </InputGroup>
-
+      <Container textAlign="center" text>
+        <Segment.Group>
+          <Segment>
+            <Grid columns="2" stackable>
+              <Grid.Column>
+                <Input
+                  type="text"
+                  name="name"
+                  label="Employee Name: "
+                  value={edit.name}
+                  placeholder="Lemmy"
+                  onChange={onHandleChange}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <Input
+                  type="number"
+                  label="Hours :"
+                  name="hours"
+                  value={edit.hours}
+                  placeholder="5"
+                  onChange={onHandleChange}
+                />
+              </Grid.Column>
+            </Grid>
+          </Segment>
+          <Segment>
             <Button type="button" color="success" onClick={addPerson}>
               Add
             </Button>
-          </Form>
-        </Col>
+          </Segment>
+        </Segment.Group>
       </Container>
     </>
   );

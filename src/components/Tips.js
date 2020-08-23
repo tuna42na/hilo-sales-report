@@ -10,18 +10,16 @@ const Tips = () => {
   const { totalHours } = useSelector((state) => state.tipsheet);
 
   return (
-    <>
-      <Container textAlign="center">
-        <Header as="h4">Total Tips</Header>
-        <EmployeeList />
-        <AddEmployee />
-        <Header as="h5">Total Hrs: {totalHours}</Header>
-        <Header as="h5"> Total Tips: {totalTips} </Header>
-        <Header as="h5">
-          Average $ per Hr: {(totalTips / totalHours).toFixed(2)}{" "}
-        </Header>
-      </Container>
-    </>
+    <Container textAlign="center">
+      <Header as="h2"> Tips </Header>
+      <EmployeeList />
+      <AddEmployee />
+      <Header as="h5">Total Hrs: {totalHours}</Header>
+      <Header as="h5"> Total Tips: {totalTips} </Header>
+      <Header as="h5">
+        Average $ per Hr: {(totalTips / totalHours).toFixed(2)}{" "}
+      </Header>
+    </Container>
   );
 };
 

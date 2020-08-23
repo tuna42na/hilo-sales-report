@@ -1,6 +1,12 @@
 export const SET_TAB = "SET_TAB";
+export const SET_GROSS_SALES = "SET_GROSS_SALES";
 export const SET_MORNING_SALES = "SET_MORNING_SALES";
 export const SET_NIGHT_SALES = "SET_NIGHT_SALES";
+export const SET_CASH_SALES = "SET_CASH_SALES";
+export const SET_CREDIT_SALES = "SETCREDITS_SALES";
+export const SET_GIFT_SALES = "SET_GIFT_SALES";
+export const SET_PAYIN = "SET_PAYIN";
+export const SET_PAYOUT = "SET_PAYOUT";
 export const SET_GROSS_TIPS = "SET_GROSS_TIPS";
 export const SET_AM_TIPS = "SET_AM_TIPS";
 export const SET_PM_TIPS = "SET_PM_TIPS";

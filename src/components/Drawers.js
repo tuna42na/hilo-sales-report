@@ -8,7 +8,6 @@ import {
   Segment,
   Grid,
 } from "semantic-ui-react";
-import { ButtonGroup } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setGrossTips,
@@ -41,7 +40,8 @@ const Drawers = () => {
   };
 
   return (
-    <Container>
+    <Container text>
+      <Header as="h2"> Drawers </Header>
       <Segment>
         <Header as="h4"> CC Tip Adjustment: </Header>
         <Grid columns="2" stackable>
@@ -83,7 +83,7 @@ const Drawers = () => {
           </Grid.Column>
           <Grid.Column>
             <Input
-              label="Petty Cash Balance : $"
+              label="Petty Cash : $"
               value={pettyCash}
               onChange={(e) => dispatch(setPettyCash(e.target.value))}
             />

@@ -37,11 +37,14 @@
   }
 }
 
-.list-group{
+.list-group {
   text-align: justify;
 }
 
-.viewbox{
+.viewbox {
   min-height: 500px;
   padding: 40px 0px;
+}
+.container {
+  padding: 10px 0px;
 }
