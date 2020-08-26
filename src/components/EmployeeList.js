@@ -34,7 +34,7 @@ const EmployeeList = () => {
             {employee.hours}
             <br />
             <strong> Tips Owed: </strong>$
-            {((employee.hours * totalTips) / totalHours).toFixed(2)}
+            {Math.floor(((employee.hours * totalTips) / totalHours).toFixed(2))}
           </ListGroupItem>
         ))}
       </ListGroup>

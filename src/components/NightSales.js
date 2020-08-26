@@ -1,17 +1,9 @@
 import React from "react";
-import {
-  Container,
-  Header,
-  Input,
-  Button,
-  Grid,
-  Segment,
-} from "semantic-ui-react";
+import { Container, Header, Input, Grid, Segment } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setGrossSales,
   setMorningSales,
-  setNightSales,
   setCashSales,
   setCreditCardSales,
   setGiftSales,
@@ -31,11 +23,6 @@ const NightSales = () => {
     payin,
     payout,
   } = useSelector((state) => state.sales);
-
-  const addNight = () => {
-    let calcNight = parseInt(grossSales - morningSales);
-    dispatch(setNightSales(calcNight));
-  };
 
   return (
     <Container text>
@@ -107,10 +94,6 @@ const NightSales = () => {
           </Grid.Column>
         </Grid>
       </Segment>
-
-      <Button color="teal" onClick={addNight}>
-        Save
-      </Button>
     </Container>
   );
 };

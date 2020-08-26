@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Container,
+  Dropdown,
   Input,
   Button,
   Header,
   Segment,
   Grid,
+  Radio,
 } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -31,12 +33,32 @@ const Drawers = () => {
     pettyCash,
     overUnder,
   } = useSelector((state) => state.drawers);
+  // const [petty, setPetty] = useState(pettyCash);
 
   const calculateAllTips = () => {
     let nightTips = parseInt(grossTips - amTips);
     let totalTips = nightTips + parseInt(cashTips);
     dispatch(setPmTips(nightTips));
     dispatch(setTotalTips(totalTips));
+  };
+
+  const options = [
+    { key: "over", text: "over", value: "over" },
+    { key: "under", text: "under", value: "under" },
+  ];
+  const positiveNegative = (e) => {
+    console.log(e.target.value);
+  };
+
+  const negOrPos = (event) => {
+    const { target } = event;
+    let pettyCashValue;
+    if (options.key === "over") {
+      pettyCashValue = target.value;
+    } else {
+      pettyCashValue = -target.value;
+    }
+    dispatch(setOverUnder(pettyCashValue));
   };
 
   return (
@@ -89,15 +111,24 @@ const Drawers = () => {
             />
           </Grid.Column>
           <Grid.Column>
-            <Button color="teal">Over</Button>
-            <Button color="teal">Under</Button>
             <Input
+              action={
+                <Dropdown
+                  button
+                  basic
+                  floating
+                  options={options}
+                  defaultValue="over"
+                  onSelect={positiveNegative}
+                />
+              }
+              placeholder="Over/Under Amount"
               value={overUnder}
-              onChange={(e) => dispatch(setOverUnder(e.target.value))}
+              onChange={negOrPos}
             />
           </Grid.Column>
           <Grid.Column>
-            <Input label="Drawers are $150?!" type="checkbox" />
+            <Radio label="Drawers are $150?!" type="checkbox" />
           </Grid.Column>
         </Grid>
       </Segment>
