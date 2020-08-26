@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  Container,
-  Form,
-  Input,
-  Grid,
-  Segment,
-} from "semantic-ui-react";
+import { Button, Container, Input, Grid, Segment } from "semantic-ui-react";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 
 const defaultState = {
@@ -72,7 +65,7 @@ const AddEmployee = () => {
             </Grid>
           </Segment>
           <Segment>
-            <Button type="button" color="success" onClick={addPerson}>
+            <Button type="button" color="teal" onClick={addPerson}>
               Add
             </Button>
           </Segment>

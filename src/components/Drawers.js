@@ -89,15 +89,15 @@ const Drawers = () => {
             />
           </Grid.Column>
           <Grid.Column>
-            <Button color="success">Over</Button>
-            <Button color="success">Under</Button>
+            <Button color="teal">Over</Button>
+            <Button color="teal">Under</Button>
             <Input
               value={overUnder}
               onChange={(e) => dispatch(setOverUnder(e.target.value))}
             />
           </Grid.Column>
           <Grid.Column>
-            <Input label="Drawers are $150?!" addon type="checkbox" />
+            <Input label="Drawers are $150?!" type="checkbox" />
           </Grid.Column>
         </Grid>
       </Segment>

@@ -17,3 +17,4 @@ export const SET_PETTY_CASH = "SET_PETTY_CASH";
 export const SET_OVER_UNDER = "SET_OVER_UNDER";
 export const SET_EMPLOYEES = "SET_EMPLOYEES";
 export const SET_TOTAL_HOURS = "SET_TOTAL_HOURS";
+export const SET_NOTES = "SET_NOTES";

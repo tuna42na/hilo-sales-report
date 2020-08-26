@@ -108,7 +108,7 @@ const NightSales = () => {
         </Grid>
       </Segment>
 
-      <Button outline color="success" onClick={addNight}>
+      <Button color="teal" onClick={addNight}>
         Save
       </Button>
     </Container>

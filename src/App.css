@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: #606273;
 }
 
 .App-logo {
@@ -47,4 +48,11 @@
 }
 .container {
   padding: 10px 0px;
+}
+.hiloHeader {
+  background: rgb(247, 240, 222);
+  color: #606273;
+}
+
+.h1 {
 }

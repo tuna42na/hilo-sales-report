@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
-import { Container, Button, Icon } from "semantic-ui-react";
+import { Container, Icon } from "semantic-ui-react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
 const EmployeeList = () => {

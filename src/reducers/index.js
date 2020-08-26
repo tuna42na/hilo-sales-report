@@ -136,7 +136,6 @@ const initialTipSheetState = {
 const tipsheet = (state = initialTipSheetState, action) => {
   switch (action.type) {
     case types.SET_EMPLOYEES:
-      console.log(action.payload);
       return {
         ...state,
         employeeGroup: [...action.payload],
@@ -151,4 +150,17 @@ const tipsheet = (state = initialTipSheetState, action) => {
   }
 };
 
-export default combineReducers({ tab, sales, drawers, tipsheet });
+// Notes and Actions
+const notes = (state = { notes: "" }, action) => {
+  switch (action.type) {
+    case types.SET_NOTES:
+      return {
+        ...state,
+        notes: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ tab, sales, drawers, tipsheet, notes });

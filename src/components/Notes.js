@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setNotes } from "../actions/notesActions";
 import {
   Container,
   Button,
@@ -9,13 +11,20 @@ import {
 } from "semantic-ui-react";
 
 const Notes = () => {
+  const dispatch = useDispatch();
+  const { notes } = useSelector((state) => state.notes);
+
   return (
     <Container text>
       <Header as="h2"> Notes </Header>
       <Segment.Group>
         <Segment>
           <Form>
-            <TextArea placeholder="LOL, what happened tonight?!" />
+            <TextArea
+              value={notes}
+              placeholder="LOL, what happened tonight?!"
+              onChange={(e) => dispatch(setNotes(e.target.value))}
+            />
           </Form>
         </Segment>
         <Segment>

@@ -9,6 +9,7 @@ import Tips from "./Tips";
 import Drawers from "./Drawers";
 import Notes from "./Notes";
 import NextPrev from "./NextPrev";
+import Final from "./Final";
 
 let currentDay = new Date();
 let day = currentDay.getDate();
@@ -24,15 +25,13 @@ let year = currentDay.getFullYear();
 export const HiloDaily = () => {
   const dispatch = useDispatch();
   const handleTabClick = (tab) => {
-    console.log("[hilodaily] handleTabClick", tab);
     dispatch(setTab(tab));
   };
   const tab = useSelector((state) => state.tab);
-  console.log("tab", tab);
 
   return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="hiloHeader">
         <Header as="h1" size="huge">
           {" "}
           HiLo Daily Sales Report{" "}
@@ -93,6 +92,7 @@ export const HiloDaily = () => {
           </Row>
         </Tab.Container>
       </Container>
+      <Final />
     </div>
   );
 };
