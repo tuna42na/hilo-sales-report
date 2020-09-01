@@ -33,6 +33,9 @@ const NextPrev = () => {
       case 2:
         dispatch(setTab(3));
         break;
+      case 3:
+        dispatch(setTab(4));
+        break;
       default:
         return;
     }

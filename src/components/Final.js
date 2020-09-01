@@ -2,6 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Container, Segment, Header, Table } from "semantic-ui-react";
 
+let currentDay = new Date();
+let day = currentDay.getDate();
+if (day < 10) {
+  day = "0" + day;
+}
+let month = currentDay.getMonth() + 1;
+if (month < 10) {
+  month = "0" + month;
+}
+let year = currentDay.getFullYear();
+
 const Final = () => {
   const {
     grossSales,
@@ -30,6 +41,9 @@ const Final = () => {
       <div class="finalReport">
         <Container classNames="finalReport" text>
           <Header as="h2">Manager:</Header>
+          <Header as="h2">
+            Date:{month}/{day}/{year}
+          </Header>
 
           <Segment.Group>
             <Segment>

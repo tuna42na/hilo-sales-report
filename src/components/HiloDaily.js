@@ -33,7 +33,6 @@ export const HiloDaily = () => {
     <div>
       <Jumbotron className="hiloHeader">
         <Header as="h1" size="huge">
-          {" "}
           HiLo Daily Sales Report{" "}
         </Header>
         <Container>
@@ -70,6 +69,7 @@ export const HiloDaily = () => {
                 <Nav.Item>
                   <Nav.Link eventKey="3">Notes</Nav.Link>
                 </Nav.Item>
+                <Nav.Item eventKey="4"></Nav.Item>
               </Nav>
             </Col>
             <Col sm={9}>
@@ -86,13 +86,15 @@ export const HiloDaily = () => {
                 <Tab.Pane eventKey="3">
                   <Notes />
                 </Tab.Pane>
+                <Tab.Pane eventKey="4">
+                  <Final />
+                </Tab.Pane>
               </Tab.Content>
               <NextPrev />
             </Col>
           </Row>
         </Tab.Container>
       </Container>
-      <Final />
     </div>
   );
 };
