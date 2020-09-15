@@ -4,6 +4,7 @@ import { Header, Input, Container } from "semantic-ui-react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setTab } from "../actions/tabActions";
+import tunalogo from "../tunalogo.svg";
 import NightSales from "./NightSales";
 import Tips from "./Tips";
 import Drawers from "./Drawers";
@@ -94,6 +95,7 @@ export const HiloDaily = () => {
             </Col>
           </Row>
         </Tab.Container>
+        <img src={tunalogo} className="App-logo" alt="logo" />
       </Container>
     </div>
   );
