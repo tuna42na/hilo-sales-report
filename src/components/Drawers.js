@@ -20,6 +20,7 @@ import {
   setCashOwed,
   setPettyCash,
   setOverUnder,
+  setDrawCount,
 } from "../actions/drawerActions";
 
 const Drawers = () => {
@@ -32,6 +33,7 @@ const Drawers = () => {
     cashOwed,
     pettyCash,
     overUnder,
+    drawCount,
   } = useSelector((state) => state.drawers);
   // const [petty, setPetty] = useState(pettyCash);
 
@@ -65,47 +67,63 @@ const Drawers = () => {
     <Container text>
       <Header as="h2"> Drawers </Header>
       <Segment>
-        <Header as="h4"> CC Tip Adjustment: </Header>
+        <Header as="h4"> CC Tip Adjustment </Header>
         <Grid columns="2" stackable>
           <Grid.Column>
             <Input
-              label="Gross Tips : "
+              label="Gross Tips "
+              type="number"
+              placeholder="$"
               value={grossTips}
               onChange={(e) => dispatch(setGrossTips(e.target.value))}
             />
           </Grid.Column>
           <Grid.Column>
             <Input
-              label="AM Tips: $"
+              label="AM Tips"
+              type="number"
+              placeholder="$"
               value={amTips}
               onChange={(e) => dispatch(setAmTips(e.target.value))}
             />
           </Grid.Column>
           <Grid.Column>
             <Input
-              label="Cash Tips : $"
+              label="Cash Tips"
+              type="number"
+              placeholder="$"
               value={cashTips}
               onChange={(e) => dispatch(setCashTips(e.target.value))}
             />
           </Grid.Column>
           <Grid.Column>
-            <div>Pm Tips Owed $: {pmTips} </div>
+            <Input
+              label="PM Tips"
+              type="number"
+              placeholder="$"
+              value={pmTips}
+            />
           </Grid.Column>
         </Grid>
       </Segment>
       <Segment>
-        <Header as="h4">Cash: </Header>
+        <Header as="h4">Cash</Header>
         <Grid columns="2" stackable>
           <Grid.Column>
             <Input
-              label="Cash Owed : $"
+              label="Cash Owed"
+              type="number"
+              placeholder="$"
               value={cashOwed}
               onChange={(e) => dispatch(setCashOwed(e.target.value))}
+              onInput={calculateAllTips}
             />
           </Grid.Column>
           <Grid.Column>
             <Input
-              label="Petty Cash : $"
+              label="Petty Cash"
+              type="number"
+              placeholder="$"
               value={pettyCash}
               onChange={(e) => dispatch(setPettyCash(e.target.value))}
             />
@@ -122,17 +140,20 @@ const Drawers = () => {
                   onSelect={positiveNegative}
                 />
               }
-              placeholder="Over/Under Amount"
+              placeholder="$ Over/Under Amount"
               value={overUnder}
-              onChange={negOrPos}
+              onInput={negOrPos}
             />
           </Grid.Column>
           <Grid.Column>
-            <Radio label="Drawers are $150?!" type="checkbox" />
+            <Radio
+              label="Drawers are $150?!"
+              type="checkbox"
+              value={drawCount}
+            />
           </Grid.Column>
         </Grid>
       </Segment>
-      <Button onClick={calculateAllTips}> Save </Button>
     </Container>
   );
 };

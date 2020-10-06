@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Jumbotron } from "reactstrap";
-import { Header, Input, Container } from "semantic-ui-react";
-import { Tab, Row, Col, Nav } from "react-bootstrap";
+import { Header, Input, Container, Segment, Tab } from "semantic-ui-react";
+import { Row, Col, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setTab } from "../actions/tabActions";
+import axios from "axios";
+import hiloLogo from "../hilologo.png";
 import tunalogo from "../tunalogo.svg";
 import NightSales from "./NightSales";
 import Tips from "./Tips";
@@ -29,12 +31,60 @@ export const HiloDaily = () => {
     dispatch(setTab(tab));
   };
   const tab = useSelector((state) => state.tab);
+  const [quote, setQuote] = useState([]);
+  const quoteId = parseInt(Math.floor(Math.random() * quote.length));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios("https://type.fit/api/quotes");
+      setQuote(result.data);
+    };
+    fetchData();
+  }, []);
+
+  let thisQuote = quote[quoteId];
+
+  const panes = [
+    {
+      menuItem: "Night Sales",
+      render: () => (
+        <Tab.Pane>
+          <NightSales />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Drawers",
+      render: () => (
+        <Tab.Pane>
+          <Drawers />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Tips",
+      render: () => (
+        <Tab.Pane>
+          <Tips />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: "Notes",
+      render: () => (
+        <Tab.Pane>
+          <Notes />
+        </Tab.Pane>
+      ),
+    },
+  ];
 
   return (
     <div>
       <Jumbotron className="hiloHeader">
+        <img className="hiloLogo" src={hiloLogo} alt="Hilo's Logo" />
         <Header as="h1" size="huge">
-          HiLo Daily Sales Report{" "}
+          Daily Sales Report{" "}
         </Header>
         <Container>
           <Row>
@@ -50,52 +100,37 @@ export const HiloDaily = () => {
         </Container>
       </Jumbotron>
 
-      <Container className="viewbox">
-        <Tab.Container
-          id="left-tabs-example"
-          activeKey={tab}
-          onSelect={handleTabClick}>
-          <Row>
-            <Col sm={3}>
-              <Nav variant="pills" className="flex-column">
-                <Nav.Item>
-                  <Nav.Link eventKey="0">Sales</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="1">Drawers</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="2">Night Tips</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="3">Notes</Nav.Link>
-                </Nav.Item>
-                <Nav.Item eventKey="4"></Nav.Item>
-              </Nav>
-            </Col>
-            <Col sm={9}>
-              <Tab.Content>
-                <Tab.Pane eventKey="0">
-                  <NightSales />
-                </Tab.Pane>
-                <Tab.Pane eventKey="1">
-                  <Drawers />
-                </Tab.Pane>
-                <Tab.Pane eventKey="2">
-                  <Tips />
-                </Tab.Pane>
-                <Tab.Pane eventKey="3">
-                  <Notes />
-                </Tab.Pane>
-                <Tab.Pane eventKey="4">
-                  <Final />
-                </Tab.Pane>
-              </Tab.Content>
-              <NextPrev />
-            </Col>
-          </Row>
-        </Tab.Container>
-        <img src={tunalogo} className="App-logo" alt="logo" />
+      <Container>
+        <Tab
+          menu={{ fluid: true, vertical: true }}
+          menuPosition="left"
+          activeIndex={tab}
+          onTabChange={handleTabClick}
+          panes={panes}
+        />
+        <NextPrev />
+        <Segment>
+          <img src={tunalogo} className="App-logo" alt="logo" />
+          <span>
+            {thisQuote ? (
+              <>
+                <blockquote className="tunaQuote">
+                  <strong>"</strong> ""
+                  <p>
+                    <em>{thisQuote.text}</em>
+                  </p>
+                  "<h4>- {thisQuote.author}</h4>
+                  <strong>"</strong>
+                </blockquote>
+                <h3>
+                  "- <em>Tuna Fortuna</em>
+                </h3>
+              </>
+            ) : (
+              <p>"Loading..."</p>
+            )}
+          </span>
+        </Segment>
       </Container>
     </div>
   );

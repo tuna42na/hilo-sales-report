@@ -78,6 +78,7 @@ const initialDrawerState = {
   cashOwed: "",
   pettyCash: "",
   overUnder: "",
+  drawCount: false,
 };
 
 const drawers = (state = initialDrawerState, action) => {
@@ -121,6 +122,11 @@ const drawers = (state = initialDrawerState, action) => {
       return {
         ...state,
         overUnder: action.payload,
+      };
+    case types.SET_DRAW_COUNT:
+      return {
+        ...state,
+        drawCount: action.payload,
       };
     default:
       return state;

@@ -8,9 +8,10 @@ This app features
 
 - Day and Night sales
 - Draw Counting
-- Employees Tip Calculation
-- Set Tip Calculations
-- Incorperates Redux for state managment
+- Induvidual Employees Tip Calculation
+- Incorperated Redux for state managment
+- Axios API requesting
+- Motivational Quotes!
 
 To Do
 

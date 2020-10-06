@@ -39,3 +39,8 @@ export const setOverUnder = (overUnder) => ({
   type: types.SET_OVER_UNDER,
   payload: overUnder,
 });
+
+export const setDrawCount = (drawCount) => ({
+  type: types.SET_DRAW_COUNT,
+  payload: drawCount,
+});
