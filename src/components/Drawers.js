@@ -4,7 +4,6 @@ import {
   Container,
   Dropdown,
   Input,
-  Button,
   Header,
   Segment,
   Grid,
@@ -146,11 +145,7 @@ const Drawers = () => {
             />
           </Grid.Column>
           <Grid.Column>
-            <Radio
-              label="Drawers are $150?!"
-              type="checkbox"
-              value={drawCount}
-            />
+            <Radio label="Drawers are $150?!" type="checkbox" />
           </Grid.Column>
         </Grid>
       </Segment>

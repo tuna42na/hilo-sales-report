@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Jumbotron } from "reactstrap";
 import { Header, Input, Container, Segment, Tab } from "semantic-ui-react";
-import { Row, Col, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setTab } from "../actions/tabActions";
 import axios from "axios";
@@ -27,8 +26,9 @@ let year = currentDay.getFullYear();
 
 export const HiloDaily = () => {
   const dispatch = useDispatch();
-  const handleTabClick = (tab) => {
-    dispatch(setTab(tab));
+
+  const handleTabClick = (e, { activeIndex }) => {
+    dispatch(setTab(activeIndex));
   };
   const tab = useSelector((state) => state.tab);
   const [quote, setQuote] = useState([]);
@@ -77,6 +77,13 @@ export const HiloDaily = () => {
         </Tab.Pane>
       ),
     },
+    {
+      render: () => (
+        <Tab.Pane>
+          <Final />
+        </Tab.Pane>
+      ),
+    },
   ];
 
   return (
@@ -87,16 +94,11 @@ export const HiloDaily = () => {
           Daily Sales Report{" "}
         </Header>
         <Container>
-          <Row>
-            <Col>
-              <Input placeholder=" Manager on Duty " />
-            </Col>
-            <Col>
-              <Header as="h4">
-                Date:{month}/{day}/{year}
-              </Header>
-            </Col>
-          </Row>
+          <Input placeholder=" Manager on Duty " />
+
+          <Header as="h4">
+            Date:{month}/{day}/{year}
+          </Header>
         </Container>
       </Jumbotron>
 
@@ -104,9 +106,9 @@ export const HiloDaily = () => {
         <Tab
           menu={{ fluid: true, vertical: true }}
           menuPosition="left"
+          panes={panes}
           activeIndex={tab}
           onTabChange={handleTabClick}
-          panes={panes}
         />
         <NextPrev />
         <Segment>
@@ -119,8 +121,12 @@ export const HiloDaily = () => {
                   <p>
                     <em>{thisQuote.text}</em>
                   </p>
-                  "<h4>- {thisQuote.author}</h4>
-                  <strong>"</strong>
+                  " -
+                  {thisQuote.author ? (
+                    <h4>{thisQuote.author}</h4>
+                  ) : (
+                    <h4>Unknown</h4>
+                  )}
                 </blockquote>
                 <h3>
                   "- <em>Tuna Fortuna</em>
