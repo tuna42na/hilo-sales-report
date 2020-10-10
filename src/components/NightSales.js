@@ -36,7 +36,7 @@ const NightSales = () => {
       <Header as="h2">Daily Sales</Header>
 
       <Segment>
-        <Grid columns="2" stackable>
+        <Grid columns="2" double stackable>
           <Grid.Column>
             <Input
               label="Gross Sales"
@@ -66,7 +66,7 @@ const NightSales = () => {
       </Segment>
 
       <Segment>
-        <Grid columns="2" stackable>
+        <Grid columns="2" double stackable>
           <Grid.Column>
             <Input
               label="Cash Sales"

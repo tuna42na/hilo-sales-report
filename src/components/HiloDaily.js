@@ -103,14 +103,16 @@ export const HiloDaily = () => {
       </Jumbotron>
 
       <Container>
-        <Tab
-          menu={{ fluid: true, vertical: true }}
-          menuPosition="left"
-          panes={panes}
-          activeIndex={tab}
-          onTabChange={handleTabClick}
-        />
-        <NextPrev />
+        <Segment>
+          <Tab
+            menu={{ secondary: true, pointing: true }}
+            menuPosition="right"
+            panes={panes}
+            activeIndex={tab}
+            onTabChange={handleTabClick}
+          />
+          <NextPrev />
+        </Segment>
         <Segment>
           <img src={tunalogo} className="App-logo" alt="logo" />
           <span>

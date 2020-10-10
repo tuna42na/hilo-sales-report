@@ -67,7 +67,7 @@ const Drawers = () => {
       <Header as="h2"> Drawers </Header>
       <Segment>
         <Header as="h4"> CC Tip Adjustment </Header>
-        <Grid columns="2" stackable>
+        <Grid columns="2" double stackable>
           <Grid.Column>
             <Input
               label="Gross Tips "
