@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom"
 import { setNotes } from "../actions/notesActions";
 import {
   Container,
@@ -28,7 +29,9 @@ const Notes = () => {
           </Form>
         </Segment>
         <Segment>
-          <Button> Finish Report </Button>
+          <Link to="/final">
+            <Button> Finish Report </Button>
+          </Link>
         </Segment>
       </Segment.Group>
     </Container>

@@ -8,6 +8,7 @@ import {
   Segment,
   Grid,
   Radio,
+  Label,
 } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -70,7 +71,7 @@ const Drawers = () => {
         <Grid columns="2" double stackable>
           <Grid.Column>
             <Input
-              label="Gross Tips "
+              label="Gross Tips"
               type="number"
               placeholder="$"
               value={grossTips}

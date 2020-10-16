@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Button, Container, Icon } from "semantic-ui-react";
 import { setTab } from "../actions/tabActions";
 import { setNightSales } from "../actions/salesActions";
@@ -33,9 +34,7 @@ const NextPrev = () => {
       case 2:
         dispatch(setTab(3));
         break;
-      case 3:
-        dispatch(setTab(4));
-        break;
+
       default:
         return;
     }

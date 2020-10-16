@@ -143,3 +143,5 @@ export const HiloDaily = () => {
     </div>
   );
 };
+
+export default HiloDaily;
