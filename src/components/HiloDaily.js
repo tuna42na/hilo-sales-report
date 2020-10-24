@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Jumbotron } from "reactstrap";
 import { Header, Input, Container, Segment, Tab } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTab } from "../actions/tabActions";
+import { setManager, setTab } from "../actions/tabActions";
 import axios from "axios";
 import hiloLogo from "../hilologo.png";
 import tunalogo from "../tunalogo.svg";
@@ -11,8 +11,8 @@ import Tips from "./Tips";
 import Drawers from "./Drawers";
 import Notes from "./Notes";
 import NextPrev from "./NextPrev";
-import Final from "./Final";
 
+// Current Date
 let currentDay = new Date();
 let day = currentDay.getDate();
 if (day < 10) {
@@ -30,7 +30,8 @@ export const HiloDaily = () => {
   const handleTabClick = (e, { activeIndex }) => {
     dispatch(setTab(activeIndex));
   };
-  const tab = useSelector((state) => state.tab);
+  const { tab, manager } = useSelector((state) => state.tab);
+
   const [quote, setQuote] = useState([]);
   const quoteId = parseInt(Math.floor(Math.random() * quote.length));
 
@@ -77,13 +78,6 @@ export const HiloDaily = () => {
         </Tab.Pane>
       ),
     },
-    {
-      render: () => (
-        <Tab.Pane>
-          <Final />
-        </Tab.Pane>
-      ),
-    },
   ];
 
   return (
@@ -94,7 +88,11 @@ export const HiloDaily = () => {
           Daily Sales Report{" "}
         </Header>
         <Container>
-          <Input placeholder=" Manager on Duty " />
+          <Input
+            placeholder=" Manager on Duty "
+            value={manager}
+            onChange={(e) => dispatch(setManager(e.target.value))}
+          />
 
           <Header as="h4">
             Date:{month}/{day}/{year}

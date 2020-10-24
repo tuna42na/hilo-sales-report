@@ -1,11 +1,23 @@
 import * as types from "../types";
 import { combineReducers } from "redux";
 
+const intialTabState = {
+  tab: 0,
+  manager: "",
+};
 // Tab State and Actions
-const tab = (state = 0, action) => {
+const tab = (state = intialTabState, action) => {
   switch (action.type) {
     case types.SET_TAB:
-      return action.payload;
+      return {
+        ...state,
+        tab: action.payload,
+      };
+    case types.SET_MANAGER:
+      return {
+        ...state,
+        manager: action.payload,
+      };
     default:
       return state;
   }

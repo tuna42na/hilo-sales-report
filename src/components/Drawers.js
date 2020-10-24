@@ -8,7 +8,6 @@ import {
   Segment,
   Grid,
   Radio,
-  Label,
 } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -35,7 +34,6 @@ const Drawers = () => {
     overUnder,
     drawCount,
   } = useSelector((state) => state.drawers);
-  // const [petty, setPetty] = useState(pettyCash);
 
   const calculateAllTips = () => {
     let nightTips = parseInt(grossTips - amTips);
@@ -45,22 +43,23 @@ const Drawers = () => {
   };
 
   const options = [
-    { key: "over", text: "over", value: "over" },
-    { key: "under", text: "under", value: "under" },
+    { key: "1", text: "over", value: "over" },
+    { key: "2", text: "under", value: "under" },
   ];
-  const positiveNegative = (e) => {
-    console.log(e.target.value);
-  };
 
-  const negOrPos = (event) => {
-    const { target } = event;
-    let pettyCashValue;
-    if (options.key === "over") {
-      pettyCashValue = target.value;
-    } else {
-      pettyCashValue = -target.value;
+  const drawToggle = (e, data) => {
+    switch (data.value) {
+      case "over":
+        dispatch(setOverUnder(Math.abs(overUnder)));
+        console.log(overUnder);
+        break;
+      case "under":
+        dispatch(setOverUnder(-Math.abs(overUnder)));
+        console.log(overUnder);
+        break;
+      default:
+        return;
     }
-    dispatch(setOverUnder(pettyCashValue));
   };
 
   return (
@@ -130,23 +129,30 @@ const Drawers = () => {
           </Grid.Column>
           <Grid.Column>
             <Input
-              action={
+              label={
                 <Dropdown
-                  button
-                  basic
-                  floating
                   options={options}
                   defaultValue="over"
-                  onSelect={positiveNegative}
+                  onChange={drawToggle}
                 />
               }
+              labelPosition="right"
               placeholder="$ Over/Under Amount"
+              type="number"
               value={overUnder}
-              onInput={negOrPos}
+              onChange={(e) => dispatch(setOverUnder(e.target.value))}
             />
           </Grid.Column>
           <Grid.Column>
-            <Radio label="Drawers are $150?!" type="checkbox" />
+            <Radio
+              label={
+                drawCount
+                  ? "Drawers are at $150!!!"
+                  : "Did you count the drawers..."
+              }
+              toggle
+              onChange={(e, data) => dispatch(setDrawCount(data.checked))}
+            />
           </Grid.Column>
         </Grid>
       </Segment>
@@ -161,6 +167,7 @@ Drawers.propTypes = {
   pettyCash: PropTypes.number,
   overUnder: PropTypes.number,
   cashTips: PropTypes.number,
+  drawCount: PropTypes.bool,
 };
 
 export default Drawers;
