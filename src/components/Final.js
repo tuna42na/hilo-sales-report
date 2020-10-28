@@ -50,6 +50,7 @@ const Final = () => {
   const print = () => {
     var hide = document.getElementById("printButton");
     hide.style.visibility = "hidden";
+    document.title = `HiloSales_${month}/${day}/${year}`;
     window.print();
     hide.style.visibility = "visible";
   };
@@ -58,7 +59,7 @@ const Final = () => {
     <>
       <div className="finalReport">
         <Container className="finalReport" text>
-          <Header as="h2">Manager :{manager}</Header>
+          <Header as="h2">Manager: {manager}</Header>
           <Header as="h2">
             Date:{month}/{day}/{year}
           </Header>
@@ -127,7 +128,7 @@ const Final = () => {
                     <Table.Cell>{overUnder}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell>Drawers are at $150 : :</Table.Cell>
+                    <Table.Cell>Drawers are at $150 : </Table.Cell>
                     <Table.Cell>{drawCount ? "true" : "false"}</Table.Cell>
                   </Table.Row>
                 </Table.Body>
