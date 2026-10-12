@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Jumbotron } from "reactstrap";
 import { Header, Input, Container, Segment, Tab } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { setManager, setTab } from "../actions/tabActions";
@@ -82,7 +81,7 @@ export const HiloDaily = () => {
 
   return (
     <div>
-      <Jumbotron className="hiloHeader">
+      <div className="jumbotron hiloHeader">
         <img className="hiloLogo" src={hiloLogo} alt="Hilo's Logo" />
         <Header as="h1" size="huge">
           Daily Sales Report{" "}
@@ -98,7 +97,7 @@ export const HiloDaily = () => {
             Date:{month}/{day}/{year}
           </Header>
         </Container>
-      </Jumbotron>
+      </div>
 
       <Container>
         <Segment>

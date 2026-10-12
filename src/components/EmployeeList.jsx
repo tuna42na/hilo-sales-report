@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 import { Container, Icon } from "semantic-ui-react";
-import { ListGroup, ListGroupItem } from "reactstrap";
 
 const EmployeeList = () => {
   const { employeeGroup, totalHours } = useSelector((state) => state.tipsheet);
@@ -12,16 +11,15 @@ const EmployeeList = () => {
   const removeEmployee = (i) => {
     let minusHours = totalHours - employeeGroup[i].hours;
     dispatch(setTotalHours(minusHours));
-    let employeeLess = employeeGroup;
-    employeeLess.splice(i, 1);
+    const employeeLess = employeeGroup.filter((_, idx) => idx !== i);
     dispatch(setEmployees(employeeLess));
   };
 
   return (
     <Container text>
-      <ListGroup>
+      <ul className="list-group">
         {employeeGroup.map((employee, i) => (
-          <ListGroupItem key={i}>
+          <li className="list-group-item" key={i}>
             <Icon
               name="window close outline"
               key={i}
@@ -35,9 +33,9 @@ const EmployeeList = () => {
             <br />
             <strong> Tips Owed: </strong>$
             {Math.floor(((employee.hours * totalTips) / totalHours).toFixed(2))}
-          </ListGroupItem>
+          </li>
         ))}
-      </ListGroup>
+      </ul>
     </Container>
   );
 };
