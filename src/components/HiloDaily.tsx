@@ -29,7 +29,10 @@ const selectQuote = (quotes: Quote[]): Quote | null =>
 export const HiloDaily = () => {
   const dispatch = useAppDispatch();
 
-  const handleTabClick: NonNullable<TabProps["onTabChange"]> = (_event, { activeIndex }) => {
+  const handleTabClick: NonNullable<TabProps["onTabChange"]> = (
+    _event,
+    { activeIndex },
+  ) => {
     if (typeof activeIndex === "number") dispatch(setTab(activeIndex));
   };
   const { tab, manager } = useAppSelector((state) => state.tab);

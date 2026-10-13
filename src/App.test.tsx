@@ -6,7 +6,7 @@ test("renders the daily sales report", () => {
   const { getByText } = render(
     <MemoryRouter>
       <App />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   expect(getByText(/daily sales report/i)).toBeInTheDocument();
 });

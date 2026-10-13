@@ -149,7 +149,9 @@ const Drawers = () => {
                   : "Did you count the drawers..."
               }
               toggle
-              onChange={(_event, data) => dispatch(setDrawCount(Boolean(data.checked)))}
+              onChange={(_event, data) =>
+                dispatch(setDrawCount(Boolean(data.checked)))
+              }
             />
           </Grid.Column>
         </Grid>

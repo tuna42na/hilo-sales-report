@@ -15,7 +15,8 @@ const Tips = () => {
       <Header as="h5">Total Hrs: {totalHours}</Header>
       <Header as="h5"> Total Tips: {totalTips} </Header>
       <Header as="h5">
-        Average $ per Hr: {totalHours ? (Number(totalTips) / totalHours).toFixed(2) : "0.00"}{" "}
+        Average $ per Hr:{" "}
+        {totalHours ? (Number(totalTips) / totalHours).toFixed(2) : "0.00"}{" "}
       </Header>
     </Container>
   );

@@ -12,16 +12,21 @@ interface EmployeeForm {
 const defaultState: EmployeeForm = { name: "", hours: "" };
 
 const AddEmployee = () => {
-  const { totalHours, employeeGroup } = useAppSelector((state) => state.tipsheet);
+  const { totalHours, employeeGroup } = useAppSelector(
+    (state) => state.tipsheet,
+  );
   const dispatch = useAppDispatch();
   const [edit, setEdit] = useState<EmployeeForm>(defaultState);
 
   const addPerson = () => {
-    const employeePlus = [...employeeGroup, {
-      index: employeeGroup.length,
-      name: edit.name,
-      hours: Number(edit.hours),
-    }];
+    const employeePlus = [
+      ...employeeGroup,
+      {
+        index: employeeGroup.length,
+        name: edit.name,
+        hours: Number(edit.hours),
+      },
+    ];
     const newHours = totalHours + Number(edit.hours);
     dispatch(setEmployees(employeePlus));
     dispatch(setTotalHours(newHours));

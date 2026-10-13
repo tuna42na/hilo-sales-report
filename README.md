@@ -1,28 +1,40 @@
-## Nightly Sales Reporting and Tip Calculation
+# HiLo Sales Report
 
-Heroku Link: https://hilo-sales-report.herokuapp.com/
+A daily sales and tip reporting app for HiLo Lounge in Athens, Georgia. Enter a shift's sales, drawer counts, tips, employee hours, and notes, then review and print a consolidated report.
 
-This app was created as a way for HiLo Lounge in Athens, Ga to calculate and save night sale reporting
+## Features
 
-This app features
+- Record gross, morning, and night sales, payment totals, pay-ins, and pay-outs.
+- Track drawer counts, cash owed, petty cash, and over/under amounts.
+- Calculate tip totals and per-employee tip shares from hours worked.
+- Add shift notes and review the report at `/final` before printing.
+- Display a motivational quote fetched from the Type.fit quotes API.
 
-- Day and Night sales
-- Draw Counting
-- Induvidual Employees Tip Calculation
-- Incorperated Redux for state managment
-- Axios API requesting
-- Motivational Quotes!
+Form data is held in the app's Redux store and is not persisted between page reloads.
 
-## Development
+## Tech Stack
 
-- `npm run dev` starts the Vite development server.
-- `npm run typecheck` runs the strict TypeScript check.
-- `npm run lint` runs ESLint.
-- `npm test` runs the Vitest suite.
-- `npm run build` creates the production build.
+React, TypeScript, Redux Toolkit, React Router, Vite, Semantic UI React, and Bootstrap.
 
-To Do
+## Getting Started
 
-- Email API and PDF print out for records
-- Fix Next/Previous Bug
-- Hilo Logo
+Requires Node.js 20.19 or later and npm.
+
+```sh
+npm install
+npm run dev
+```
+
+Vite prints the local development URL in the terminal.
+
+## Project Commands
+
+| Command             | Purpose                                  |
+| ------------------- | ---------------------------------------- |
+| `npm run dev`       | Start the Vite development server.       |
+| `npm run typecheck` | Run the strict TypeScript check.         |
+| `npm run lint`      | Run ESLint.                              |
+| `npm test`          | Run the Vitest test suite.               |
+| `npm run build`     | Create the production build in `build/`. |
+| `npm run preview`   | Preview the production build locally.    |
+| `npm start`         | Serve the existing `build/` directory.   |

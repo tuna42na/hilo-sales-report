@@ -9,7 +9,9 @@ const NextPrev = () => {
   const dispatch = useAppDispatch();
   const { tab } = useAppSelector((state) => state.tab);
   const { grossSales, morningSales } = useAppSelector((state) => state.sales);
-  const { grossTips, amTips, cashTips } = useAppSelector((state) => state.drawers);
+  const { grossTips, amTips, cashTips } = useAppSelector(
+    (state) => state.drawers,
+  );
 
   const addNight = () => {
     const calcNight = Math.trunc(Number(grossSales) - Number(morningSales));

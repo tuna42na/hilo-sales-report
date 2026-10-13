@@ -37,7 +37,9 @@ const Final = () => {
     drawCount,
   } = useAppSelector((state) => state.drawers);
   const { manager } = useAppSelector((state) => state.tab);
-  const { totalHours, employeeGroup } = useAppSelector((state) => state.tipsheet);
+  const { totalHours, employeeGroup } = useAppSelector(
+    (state) => state.tipsheet,
+  );
   const { notes } = useAppSelector((state) => state.notes);
 
   const print = () => {
@@ -152,7 +154,9 @@ const Final = () => {
                       <Table.Cell>
                         Tips : $
                         {totalHours
-                          ? Math.floor((Number(grossTips) * employee.hours) / totalHours)
+                          ? Math.floor(
+                              (Number(grossTips) * employee.hours) / totalHours,
+                            )
                           : 0}
                       </Table.Cell>
                     </Table.Row>

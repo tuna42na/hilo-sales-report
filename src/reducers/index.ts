@@ -5,7 +5,10 @@ import type { AppAction, RootState } from "../types";
 
 const initialTabState: RootState["tab"] = { tab: 0, manager: "" };
 
-const tab = (state = initialTabState, action: UnknownAction): RootState["tab"] => {
+const tab = (
+  state = initialTabState,
+  action: UnknownAction,
+): RootState["tab"] => {
   const appAction = action as AppAction;
   switch (appAction.type) {
     case types.SET_TAB:
@@ -28,7 +31,10 @@ const initialSalesState: RootState["sales"] = {
   payout: "",
 };
 
-const sales = (state = initialSalesState, action: UnknownAction): RootState["sales"] => {
+const sales = (
+  state = initialSalesState,
+  action: UnknownAction,
+): RootState["sales"] => {
   const appAction = action as AppAction;
   switch (appAction.type) {
     case types.SET_GROSS_SALES:
@@ -88,7 +94,10 @@ const initialDrawerState: RootState["drawers"] = {
   drawCount: false,
 };
 
-const drawers = (state = initialDrawerState, action: UnknownAction): RootState["drawers"] => {
+const drawers = (
+  state = initialDrawerState,
+  action: UnknownAction,
+): RootState["drawers"] => {
   const appAction = action as AppAction;
   switch (appAction.type) {
     case types.SET_GROSS_TIPS:
@@ -149,7 +158,7 @@ const initialTipSheetState: RootState["tipsheet"] = {
 
 const tipsheet = (
   state = initialTipSheetState,
-  action: UnknownAction
+  action: UnknownAction,
 ): RootState["tipsheet"] => {
   const appAction = action as AppAction;
   switch (appAction.type) {
@@ -171,7 +180,7 @@ const tipsheet = (
 // Notes and Actions
 const notes = (
   state: RootState["notes"] = { notes: "" },
-  action: UnknownAction
+  action: UnknownAction,
 ): RootState["notes"] => {
   const appAction = action as AppAction;
   switch (appAction.type) {

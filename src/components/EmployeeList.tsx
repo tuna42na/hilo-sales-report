@@ -3,7 +3,9 @@ import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 import { Container, Icon } from "semantic-ui-react";
 
 const EmployeeList = () => {
-  const { employeeGroup, totalHours } = useAppSelector((state) => state.tipsheet);
+  const { employeeGroup, totalHours } = useAppSelector(
+    (state) => state.tipsheet,
+  );
   const { totalTips } = useAppSelector((state) => state.drawers);
   const dispatch = useAppDispatch();
 
