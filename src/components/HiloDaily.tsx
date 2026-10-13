@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Header, Input, Container, Segment, Tab } from "semantic-ui-react";
-import { useSelector, useDispatch } from "react-redux";
+import type { TabProps } from "semantic-ui-react";
+import { useAppDispatch, useAppSelector } from "../store";
 import { setManager, setTab } from "../actions/tabActions";
 import axios from "axios";
 import hiloLogo from "../hilologo.png";
@@ -12,37 +13,49 @@ import Notes from "./Notes";
 import NextPrev from "./NextPrev";
 
 // Current Date
-let currentDay = new Date();
-let day = currentDay.getDate();
-if (day < 10) {
-  day = "0" + day;
+const currentDay = new Date();
+const day = String(currentDay.getDate()).padStart(2, "0");
+const month = String(currentDay.getMonth() + 1).padStart(2, "0");
+const year = currentDay.getFullYear();
+
+interface Quote {
+  text: string;
+  author: string | null;
 }
-let month = currentDay.getMonth() + 1;
-if (month < 10) {
-  month = "0" + month;
-}
-let year = currentDay.getFullYear();
+
+const selectQuote = (quotes: Quote[]): Quote | null =>
+  quotes[Math.floor(Math.random() * quotes.length)] ?? null;
 
 export const HiloDaily = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleTabClick = (e, { activeIndex }) => {
-    dispatch(setTab(activeIndex));
+  const handleTabClick: NonNullable<TabProps["onTabChange"]> = (_event, { activeIndex }) => {
+    if (typeof activeIndex === "number") dispatch(setTab(activeIndex));
   };
-  const { tab, manager } = useSelector((state) => state.tab);
+  const { tab, manager } = useAppSelector((state) => state.tab);
 
-  const [quote, setQuote] = useState([]);
-  const quoteId = parseInt(Math.floor(Math.random() * quote.length));
+  const [quote, setQuote] = useState<Quote | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios("https://type.fit/api/quotes");
-      setQuote(result.data);
-    };
-    fetchData();
+  const fetchQuote = useCallback(async () => {
+    const result = await axios.get<Quote[]>("https://type.fit/api/quotes");
+    return result.data;
   }, []);
 
-  let thisQuote = quote[quoteId];
+  useEffect(() => {
+    let active = true;
+    void fetchQuote()
+      .then((quotes) => {
+        if (active) setQuote(selectQuote(quotes));
+      })
+      .catch(() => {
+        if (active) setQuote(null);
+      });
+    return () => {
+      active = false;
+    };
+  }, [fetchQuote]);
+
+  const thisQuote = quote;
 
   const panes = [
     {

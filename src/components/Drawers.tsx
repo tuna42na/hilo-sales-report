@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
   Container,
   Dropdown,
@@ -9,7 +7,9 @@ import {
   Grid,
   Radio,
 } from "semantic-ui-react";
-import { useSelector, useDispatch } from "react-redux";
+import type { DropdownProps } from "semantic-ui-react";
+import type { SyntheticEvent } from "react";
+import { useAppDispatch, useAppSelector } from "../store";
 import {
   setGrossTips,
   setAmTips,
@@ -23,7 +23,7 @@ import {
 } from "../actions/drawerActions";
 
 const Drawers = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     grossTips,
     amTips,
@@ -33,11 +33,11 @@ const Drawers = () => {
     pettyCash,
     overUnder,
     drawCount,
-  } = useSelector((state) => state.drawers);
+  } = useAppSelector((state) => state.drawers);
 
   const calculateAllTips = () => {
-    let nightTips = parseInt(grossTips - amTips);
-    let totalTips = nightTips + parseInt(cashTips);
+    const nightTips = Math.trunc(Number(grossTips) - Number(amTips));
+    const totalTips = nightTips + Math.trunc(Number(cashTips));
     dispatch(setPmTips(nightTips));
     dispatch(setTotalTips(totalTips));
   };
@@ -47,15 +47,13 @@ const Drawers = () => {
     { key: "2", text: "under", value: "under" },
   ];
 
-  const drawToggle = (e, data) => {
+  const drawToggle = (_event: SyntheticEvent, data: DropdownProps) => {
     switch (data.value) {
       case "over":
-        dispatch(setOverUnder(Math.abs(overUnder)));
-        console.log(overUnder);
+        dispatch(setOverUnder(Math.abs(Number(overUnder))));
         break;
       case "under":
-        dispatch(setOverUnder(-Math.abs(overUnder)));
-        console.log(overUnder);
+        dispatch(setOverUnder(-Math.abs(Number(overUnder))));
         break;
       default:
         return;
@@ -151,23 +149,13 @@ const Drawers = () => {
                   : "Did you count the drawers..."
               }
               toggle
-              onChange={(e, data) => dispatch(setDrawCount(data.checked))}
+              onChange={(_event, data) => dispatch(setDrawCount(Boolean(data.checked)))}
             />
           </Grid.Column>
         </Grid>
       </Segment>
     </Container>
   );
-};
-Drawers.propTypes = {
-  grossTips: PropTypes.number,
-  amTips: PropTypes.number,
-  pmTips: PropTypes.number,
-  cashOwed: PropTypes.number,
-  pettyCash: PropTypes.number,
-  overUnder: PropTypes.number,
-  cashTips: PropTypes.number,
-  drawCount: PropTypes.bool,
 };
 
 export default Drawers;

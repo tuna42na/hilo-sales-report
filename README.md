@@ -13,6 +13,14 @@ This app features
 - Axios API requesting
 - Motivational Quotes!
 
+## Development
+
+- `npm run dev` starts the Vite development server.
+- `npm run typecheck` runs the strict TypeScript check.
+- `npm run lint` runs ESLint.
+- `npm test` runs the Vitest suite.
+- `npm run build` creates the production build.
+
 To Do
 
 - Email API and PDF print out for records

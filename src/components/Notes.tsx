@@ -1,11 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 import { setNotes } from "../actions/notesActions";
 import { Container, Form, TextArea, Segment, Header } from "semantic-ui-react";
 
 const Notes = () => {
-  const dispatch = useDispatch();
-  const { notes } = useSelector((state) => state.notes);
+  const dispatch = useAppDispatch();
+  const { notes } = useAppSelector((state) => state.notes);
 
   return (
     <Container text>

@@ -1,15 +1,14 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 import { Container, Icon } from "semantic-ui-react";
 
 const EmployeeList = () => {
-  const { employeeGroup, totalHours } = useSelector((state) => state.tipsheet);
-  const { totalTips } = useSelector((state) => state.drawers);
-  const dispatch = useDispatch();
+  const { employeeGroup, totalHours } = useAppSelector((state) => state.tipsheet);
+  const { totalTips } = useAppSelector((state) => state.drawers);
+  const dispatch = useAppDispatch();
 
-  const removeEmployee = (i) => {
-    let minusHours = totalHours - employeeGroup[i].hours;
+  const removeEmployee = (i: number) => {
+    const minusHours = totalHours - employeeGroup[i].hours;
     dispatch(setTotalHours(minusHours));
     const employeeLess = employeeGroup.filter((_, idx) => idx !== i);
     dispatch(setEmployees(employeeLess));
@@ -22,7 +21,6 @@ const EmployeeList = () => {
           <li className="list-group-item" key={i}>
             <Icon
               name="window close outline"
-              key={i}
               type="button"
               onClick={() => removeEmployee(i)}
             />
@@ -32,7 +30,9 @@ const EmployeeList = () => {
             {employee.hours}
             <br />
             <strong> Tips Owed: </strong>$
-            {Math.floor(((employee.hours * totalTips) / totalHours).toFixed(2))}
+            {totalHours
+              ? Math.floor((employee.hours * Number(totalTips)) / totalHours)
+              : 0}
           </li>
         ))}
       </ul>

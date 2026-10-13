@@ -1,13 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { Header, Container } from "semantic-ui-react";
+import { useAppSelector } from "../store";
 import EmployeeList from "./EmployeeList";
 import AddEmployee from "./AddEmployee";
 
 const Tips = () => {
-  const { totalTips } = useSelector((state) => state.drawers);
-  const { totalHours } = useSelector((state) => state.tipsheet);
+  const { totalTips } = useAppSelector((state) => state.drawers);
+  const { totalHours } = useAppSelector((state) => state.tipsheet);
 
   return (
     <Container textAlign="center">
@@ -17,15 +15,9 @@ const Tips = () => {
       <Header as="h5">Total Hrs: {totalHours}</Header>
       <Header as="h5"> Total Tips: {totalTips} </Header>
       <Header as="h5">
-        Average $ per Hr: {(totalTips / totalHours).toFixed(2)}{" "}
+        Average $ per Hr: {totalHours ? (Number(totalTips) / totalHours).toFixed(2) : "0.00"}{" "}
       </Header>
     </Container>
   );
-};
-
-Tips.propTypes = {
-  totalTips: PropTypes.number,
-  totalHours: PropTypes.number,
-  employeeGroup: PropTypes.array,
 };
 export default Tips;

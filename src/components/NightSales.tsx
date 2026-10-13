@@ -1,7 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Container, Header, Input, Grid, Segment } from "semantic-ui-react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 import {
   setGrossSales,
   setMorningSales,
@@ -14,7 +12,7 @@ import {
 } from "../actions/salesActions";
 
 const NightSales = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     grossSales,
     morningSales,
@@ -24,10 +22,10 @@ const NightSales = () => {
     giftCardSales,
     payin,
     payout,
-  } = useSelector((state) => state.sales);
+  } = useAppSelector((state) => state.sales);
 
   const addNight = () => {
-    let calcNight = parseInt(grossSales - morningSales);
+    const calcNight = Math.trunc(Number(grossSales) - Number(morningSales));
     dispatch(setNightSales(calcNight));
   };
 
@@ -122,17 +120,6 @@ const NightSales = () => {
       </Segment>
     </Container>
   );
-};
-
-NightSales.propTypes = {
-  grossSales: PropTypes.number,
-  morningSales: PropTypes.number,
-  nightSales: PropTypes.number,
-  creditCardSales: PropTypes.number,
-  cashSales: PropTypes.number,
-  giftCardSales: PropTypes.number,
-  payin: PropTypes.number,
-  payout: PropTypes.number,
 };
 
 export default NightSales;

@@ -1,5 +1,4 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../store";
 import {
   Button,
   Container,
@@ -11,16 +10,10 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-let currentDay = new Date();
-let day = currentDay.getDate();
-if (day < 10) {
-  day = "0" + day;
-}
-let month = currentDay.getMonth() + 1;
-if (month < 10) {
-  month = "0" + month;
-}
-let year = currentDay.getFullYear();
+const currentDay = new Date();
+const day = String(currentDay.getDate()).padStart(2, "0");
+const month = String(currentDay.getMonth() + 1).padStart(2, "0");
+const year = currentDay.getFullYear();
 
 const Final = () => {
   const {
@@ -32,7 +25,7 @@ const Final = () => {
     giftCardSales,
     payin,
     payout,
-  } = useSelector((state) => state.sales);
+  } = useAppSelector((state) => state.sales);
   const {
     grossTips,
     amTips,
@@ -42,17 +35,18 @@ const Final = () => {
     pettyCash,
     overUnder,
     drawCount,
-  } = useSelector((state) => state.drawers);
-  const { manager } = useSelector((state) => state.tab);
-  const { totalHours, employeeGroup } = useSelector((state) => state.tipsheet);
-  const { notes } = useSelector((state) => state.notes);
+  } = useAppSelector((state) => state.drawers);
+  const { manager } = useAppSelector((state) => state.tab);
+  const { totalHours, employeeGroup } = useAppSelector((state) => state.tipsheet);
+  const { notes } = useAppSelector((state) => state.notes);
 
   const print = () => {
-    var hide = document.getElementById("printButton");
-    hide.style.visibility = "hidden";
+    const printButton = document.getElementById("printButton");
+    if (!printButton) return;
+    printButton.style.visibility = "hidden";
     document.title = `HiloSales_${month}/${day}/${year}`;
     window.print();
-    hide.style.visibility = "visible";
+    printButton.style.visibility = "visible";
   };
 
   return (
@@ -151,15 +145,15 @@ const Final = () => {
                     <Table.Cell>Night Tips : {pmTips}</Table.Cell>
                     <Table.Cell>Morning Tips : {amTips}</Table.Cell>
                   </Table.Row>
-                  {employeeGroup.map((employee, i) => (
-                    <Table.Row>
+                  {employeeGroup.map((employee) => (
+                    <Table.Row key={employee.index}>
                       <Table.Cell>Name : {employee.name}</Table.Cell>
                       <Table.Cell>Hours : {employee.hours}</Table.Cell>
                       <Table.Cell>
                         Tips : $
-                        {Math.floor(
-                          ((grossTips * employee.hours) / totalHours).toFixed(2)
-                        )}
+                        {totalHours
+                          ? Math.floor((Number(grossTips) * employee.hours) / totalHours)
+                          : 0}
                       </Table.Cell>
                     </Table.Row>
                   ))}
@@ -175,7 +169,7 @@ const Final = () => {
             <Segment>
               <Link to="/">
                 <Button>
-                  <Icon name="left arrow" />
+                  <Icon name="arrow left" />
                   Go Back
                 </Button>
               </Link>

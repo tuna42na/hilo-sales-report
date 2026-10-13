@@ -1,32 +1,31 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Icon } from "semantic-ui-react";
 import { setTab } from "../actions/tabActions";
 import { setNightSales } from "../actions/salesActions";
 import { setPmTips, setTotalTips } from "../actions/drawerActions";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 
 const NextPrev = () => {
-  const dispatch = useDispatch();
-  const { tab } = useSelector((state) => state.tab);
-  const { grossSales, morningSales } = useSelector((state) => state.sales);
-  const { grossTips, amTips, cashTips } = useSelector((state) => state.drawers);
+  const dispatch = useAppDispatch();
+  const { tab } = useAppSelector((state) => state.tab);
+  const { grossSales, morningSales } = useAppSelector((state) => state.sales);
+  const { grossTips, amTips, cashTips } = useAppSelector((state) => state.drawers);
 
   const addNight = () => {
-    let calcNight = parseInt(grossSales - morningSales);
+    const calcNight = Math.trunc(Number(grossSales) - Number(morningSales));
     dispatch(setNightSales(calcNight));
   };
 
   const calculateAllTips = () => {
-    let nightTips = parseInt(grossTips - amTips);
-    let totalTips = nightTips + parseInt(cashTips);
+    const nightTips = Math.trunc(Number(grossTips) - Number(amTips));
+    const totalTips = nightTips + Math.trunc(Number(cashTips));
     dispatch(setPmTips(nightTips));
     dispatch(setTotalTips(totalTips));
   };
 
   const previous = () => {
     if (tab > 0) {
-      let prevTab = tab - 1;
+      const prevTab = tab - 1;
       dispatch(setTab(prevTab));
     }
   };
@@ -56,19 +55,19 @@ const NextPrev = () => {
           <Link to="/final">
             <Button color="teal">
               Final Report
-              <Icon name="right arrow" />
+              <Icon name="arrow right" />
             </Button>
           </Link>{" "}
         </Container>
       ) : (
         <Container>
           <Button color="teal" id="prevTab" onClick={previous}>
-            <Icon name="left arrow" />
+            <Icon name="arrow left" />
             Previous
           </Button>
           <Button color="teal" id="nextTab" onClick={next}>
             Next
-            <Icon name="right arrow" />
+            <Icon name="arrow right" />
           </Button>
         </Container>
       )}

@@ -1,29 +1,23 @@
-import * as types from "../types";
 import { combineReducers } from "redux";
+import type { UnknownAction } from "redux";
+import * as types from "../types";
+import type { AppAction, RootState } from "../types";
 
-const intialTabState = {
-  tab: 0,
-  manager: "",
-};
-// Tab State and Actions
-const tab = (state = intialTabState, action) => {
-  switch (action.type) {
+const initialTabState: RootState["tab"] = { tab: 0, manager: "" };
+
+const tab = (state = initialTabState, action: UnknownAction): RootState["tab"] => {
+  const appAction = action as AppAction;
+  switch (appAction.type) {
     case types.SET_TAB:
-      return {
-        ...state,
-        tab: action.payload,
-      };
+      return { ...state, tab: appAction.payload };
     case types.SET_MANAGER:
-      return {
-        ...state,
-        manager: action.payload,
-      };
+      return { ...state, manager: appAction.payload };
     default:
       return state;
   }
 };
-// Sales State and Actions
-const initialSalesState = {
+
+const initialSalesState: RootState["sales"] = {
   grossSales: "",
   morningSales: "",
   nightSales: "",
@@ -34,54 +28,55 @@ const initialSalesState = {
   payout: "",
 };
 
-const sales = (state = initialSalesState, action) => {
-  switch (action.type) {
+const sales = (state = initialSalesState, action: UnknownAction): RootState["sales"] => {
+  const appAction = action as AppAction;
+  switch (appAction.type) {
     case types.SET_GROSS_SALES:
       return {
         ...state,
-        grossSales: action.payload,
+        grossSales: appAction.payload,
       };
     case types.SET_MORNING_SALES:
       return {
         ...state,
-        morningSales: action.payload,
+        morningSales: appAction.payload,
       };
     case types.SET_NIGHT_SALES:
       return {
         ...state,
-        nightSales: action.payload,
+        nightSales: appAction.payload,
       };
     case types.SET_CASH_SALES:
       return {
         ...state,
-        cashSales: action.payload,
+        cashSales: appAction.payload,
       };
     case types.SET_CREDIT_SALES:
       return {
         ...state,
-        creditCardSales: action.payload,
+        creditCardSales: appAction.payload,
       };
     case types.SET_GIFT_SALES:
       return {
         ...state,
-        giftCardSales: action.payload,
+        giftCardSales: appAction.payload,
       };
     case types.SET_PAYIN:
       return {
         ...state,
-        payin: action.payload,
+        payin: appAction.payload,
       };
     case types.SET_PAYOUT:
       return {
         ...state,
-        payout: action.payload,
+        payout: appAction.payload,
       };
     default:
       return state;
   }
 };
 // Drawer State and Actions
-const initialDrawerState = {
+const initialDrawerState: RootState["drawers"] = {
   grossTips: "",
   amTips: "",
   pmTips: "",
@@ -93,52 +88,53 @@ const initialDrawerState = {
   drawCount: false,
 };
 
-const drawers = (state = initialDrawerState, action) => {
-  switch (action.type) {
+const drawers = (state = initialDrawerState, action: UnknownAction): RootState["drawers"] => {
+  const appAction = action as AppAction;
+  switch (appAction.type) {
     case types.SET_GROSS_TIPS:
       return {
         ...state,
-        grossTips: action.payload,
+        grossTips: appAction.payload,
       };
     case types.SET_AM_TIPS:
       return {
         ...state,
-        amTips: action.payload,
+        amTips: appAction.payload,
       };
     case types.SET_PM_TIPS:
       return {
         ...state,
-        pmTips: action.payload,
+        pmTips: appAction.payload,
       };
     case types.SET_CASH_TIPS:
       return {
         ...state,
-        cashTips: action.payload,
+        cashTips: appAction.payload,
       };
     case types.SET_TOTAL_TIPS:
       return {
         ...state,
-        totalTips: action.payload,
+        totalTips: appAction.payload,
       };
     case types.SET_CASH_OWED:
       return {
         ...state,
-        cashOwed: action.payload,
+        cashOwed: appAction.payload,
       };
     case types.SET_PETTY_CASH:
       return {
         ...state,
-        pettyCash: action.payload,
+        pettyCash: appAction.payload,
       };
     case types.SET_OVER_UNDER:
       return {
         ...state,
-        overUnder: action.payload,
+        overUnder: appAction.payload,
       };
     case types.SET_DRAW_COUNT:
       return {
         ...state,
-        drawCount: action.payload,
+        drawCount: appAction.payload,
       };
     default:
       return state;
@@ -146,22 +142,26 @@ const drawers = (state = initialDrawerState, action) => {
 };
 
 // Tip Sheet State and Actions
-const initialTipSheetState = {
+const initialTipSheetState: RootState["tipsheet"] = {
   employeeGroup: [],
   totalHours: 0,
 };
 
-const tipsheet = (state = initialTipSheetState, action) => {
-  switch (action.type) {
+const tipsheet = (
+  state = initialTipSheetState,
+  action: UnknownAction
+): RootState["tipsheet"] => {
+  const appAction = action as AppAction;
+  switch (appAction.type) {
     case types.SET_EMPLOYEES:
       return {
         ...state,
-        employeeGroup: [...action.payload],
+        employeeGroup: [...appAction.payload],
       };
     case types.SET_TOTAL_HOURS:
       return {
         ...state,
-        totalHours: action.payload,
+        totalHours: appAction.payload,
       };
     default:
       return state;
@@ -169,12 +169,16 @@ const tipsheet = (state = initialTipSheetState, action) => {
 };
 
 // Notes and Actions
-const notes = (state = { notes: "" }, action) => {
-  switch (action.type) {
+const notes = (
+  state: RootState["notes"] = { notes: "" },
+  action: UnknownAction
+): RootState["notes"] => {
+  const appAction = action as AppAction;
+  switch (appAction.type) {
     case types.SET_NOTES:
       return {
         ...state,
-        notes: action.payload,
+        notes: appAction.payload,
       };
     default:
       return state;

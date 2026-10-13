@@ -1,33 +1,34 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import type { ChangeEvent } from "react";
+import { useAppDispatch, useAppSelector } from "../store";
 import { Button, Container, Input, Grid, Segment } from "semantic-ui-react";
 import { setEmployees, setTotalHours } from "../actions/tipSheetActions";
 
-const defaultState = {
-  index: "",
-  name: "",
-  hours: "",
-};
+interface EmployeeForm {
+  name: string;
+  hours: string;
+}
+
+const defaultState: EmployeeForm = { name: "", hours: "" };
 
 const AddEmployee = () => {
-  const { totalHours, employeeGroup } = useSelector((state) => state.tipsheet);
-  const dispatch = useDispatch();
-  const [edit, setEdit] = useState([]);
+  const { totalHours, employeeGroup } = useAppSelector((state) => state.tipsheet);
+  const dispatch = useAppDispatch();
+  const [edit, setEdit] = useState<EmployeeForm>(defaultState);
 
   const addPerson = () => {
-    let employeePlus = employeeGroup;
-    employeePlus.push({
-      index: employeePlus.length,
+    const employeePlus = [...employeeGroup, {
+      index: employeeGroup.length,
       name: edit.name,
-      hours: edit.hours,
-    });
-    let newHours = totalHours + parseInt(edit.hours);
+      hours: Number(edit.hours),
+    }];
+    const newHours = totalHours + Number(edit.hours);
     dispatch(setEmployees(employeePlus));
     dispatch(setTotalHours(newHours));
     setEdit(defaultState);
   };
 
-  const onHandleChange = (event) => {
+  const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const { name, value } = target;
     setEdit({
